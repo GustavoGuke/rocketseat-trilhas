@@ -3,10 +3,11 @@ import { View, Text, Image, Button } from 'tamagui';
 
 import PaginaBase from '../PaginaBase';
 import { useNavigation } from '@react-navigation/native';
+import { RootScreenNavigationProp, RootStackParamList } from '../../types/rotas';
 
 
-const Home: React.FC = ({navigation}) => {
-    
+const Home: React.FC = () => {
+    const navigation = useNavigation<RootScreenNavigationProp>()
     return (
         <View style={styles.container}>
             <PaginaBase>
@@ -14,7 +15,7 @@ const Home: React.FC = ({navigation}) => {
                     <Text style={[styles.text, styles.title]}>Realcenutri</Text>
                     <Text style={styles.text}>Mude seus Hábitos Alimentares</Text>
 
-                    <Button style={styles.button} onPress={() => navigation.navigate('Login')}>
+                    <Button style={styles.button} onPress={() => navigation.navigate('Login', {email:'teste', password:'teste'})}>
                         <Text style={styles.textoBotao}>LOGIN</Text>
                     </Button>
 
@@ -35,7 +36,6 @@ const styles = StyleSheet.create({
     text: {
         color: "white",
         textAlign: 'center',
-        fontFamily: 'PoppinsRegular',
         fontSize: 24,
         fontWeight: '400',
     },

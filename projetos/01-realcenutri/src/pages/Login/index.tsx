@@ -3,15 +3,26 @@ import { StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { View } from 'tamagui';
 import { gray, green } from '@tamagui/colors';
 import { Ionicons } from '@expo/vector-icons';
+import { useRoute, RouteProp } from '@react-navigation/native';
+import { RootScreenNavigationProp } from '../../types/rotas';
+
+type ParamList = {
+  Login: {
+    email: string,
+    password: string
+  }
+}
 
 const Login: React.FC = () => {
+  const route = useRoute<RouteProp<ParamList>>()
   return (
-    <View flex={1} justifyContent='center' alignItems='center' backgroundColor='$green10'>
+    <View flex={1} justifyContent='center' alignItems='center' backgroundColor='$green7'>
       <Text style={styles.title}>Login</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
         placeholderTextColor={gray.gray10}
+        value={route.params.email}
       />
       <TextInput
         style={styles.input}
@@ -31,7 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: green.green8, // Use a cor verde claro
+    backgroundColor: '#dda743', // Use a cor verde claro
   },
   title: {
     fontSize: 24,
