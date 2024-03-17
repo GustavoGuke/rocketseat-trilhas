@@ -23,9 +23,11 @@ export const Title = styled.Text`
 
 `
 
-export const Icon = styled(UsersThree)`
-    size: 32px;
-    color: ${(props: { theme: { COLORS: { GREEN_500: any; }; }; }) => props.theme.COLORS.GREEN_500};
+export const Icon = styled(UsersThree).attrs(({ theme }) => ({
+  weight: 'fill',
+  size: 32,
+  color: theme.COLORS.GREEN_500
+}))`
 
     margin-right: 20px
 `

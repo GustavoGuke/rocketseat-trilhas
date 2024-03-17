@@ -8,5 +8,6 @@ export const Container = styled.View`
     background-color: ${(props: { theme: { COLORS: { GRAY_600: any; }; }; }) => props.theme.COLORS.GRAY_600}
 
 `
-
-export const LoadingIndicator = styled.ActivityIndicator``
+export const LoadingIndicator = styled.ActivityIndicator.attrs(({ theme }) => ({
+  color: theme.COLORS.GREEN_700
+}))``
