@@ -9,9 +9,9 @@ export function NewGroup() {
             <Header showBackButton={true} />
             <Content>
                 <Icon />
-                <HighLight 
-                title='Nova turma' 
-                subtitle='crie uma turma para adicionar as pessoas' />
+                <HighLight
+                    title='Nova turma'
+                    subtitle='crie uma turma para adicionar as pessoas' />
                 <Button title='Criar' />
             </Content>
         </Container>
