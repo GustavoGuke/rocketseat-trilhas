@@ -5,7 +5,7 @@ import { ButtonIcon } from "@components/ButtonIcon";
 import { Container, Form, HeaderList } from "./style";
 import Input from "@components/Input";
 import { Filter } from "@components/Filter";
-import { FlatList } from "react-native";
+import { FlatList, Text, TouchableOpacity } from "react-native";
 import { useState } from "react";
 
 export function Players() {
@@ -20,7 +20,7 @@ export function Players() {
             />
             <Form>
                 <Input placeholder="Nome" />
-                <ButtonIcon icon="home" />
+                <ButtonIcon icon="add" />
             </Form>
 
             <HeaderList>
@@ -29,10 +29,10 @@ export function Players() {
                     keyExtractor={item => item}
                     renderItem={({ item }) => (
                         <Filter
-                            isActive={item === team}
-                            onPress={() => setTeam(item)}
-                            title={item} />
-                    )}
+                        isActive={item === team}
+                        onPress={() => setTeam(item)}
+                        title={item} />
+                        )}
                     horizontal
                 />
             </HeaderList>
