@@ -7,9 +7,15 @@ import Input from "@components/Input";
 import { Filter } from "@components/Filter";
 import { FlatList, Text, TouchableOpacity } from "react-native";
 import { useState } from "react";
+import { PlayerCard } from "@components/PlayerCard";
 
 export function Players() {
     const [team, setTeam] = useState('Time A')
+    const [players, setPlayers] = useState([
+        "Gustavo",
+        "Kerolin",
+        "Kessilin"
+    ])
     return (
         <Container >
             <Header showBackButton />
@@ -29,13 +35,25 @@ export function Players() {
                     keyExtractor={item => item}
                     renderItem={({ item }) => (
                         <Filter
-                        isActive={item === team}
-                        onPress={() => setTeam(item)}
-                        title={item} />
-                        )}
+                            isActive={item === team}
+                            onPress={() => setTeam(item)}
+                            title={item} />
+                    )}
                     horizontal
                 />
             </HeaderList>
+
+            <FlatList
+                data={players}
+                keyExtractor={item => item}
+                renderItem={({ item }) => (
+                    <PlayerCard
+                        name={item} 
+                        onRemove={() => {}}
+                        />
+                )}
+            />
+
 
         </Container>
     )
