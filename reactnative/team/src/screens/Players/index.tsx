@@ -8,6 +8,7 @@ import { Filter } from "@components/Filter";
 import { FlatList, Text, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { PlayerCard } from "@components/PlayerCard";
+import { ListEmpty } from "@components/ListEmpty";
 
 export function Players() {
     const [team, setTeam] = useState('Time A')
@@ -52,6 +53,16 @@ export function Players() {
                         onRemove={() => {}}
                         />
                 )}
+                ListEmptyComponent={() => (
+                    <ListEmpty
+                        message="Não ha jogadores"
+                    />
+                )}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={[
+                    { paddingBottom: 100 },
+                    players.length === 0 && { flex: 1 }
+                ]}
             />
 
 
