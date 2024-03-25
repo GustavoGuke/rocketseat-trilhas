@@ -14,7 +14,7 @@ export default function Header({ showBackButton = false }: Props) {
             {
                showBackButton &&
                 <BackButton
-                onPress={() => navigation.goBack()}
+                onPress={() => navigation.navigate("Groups")}
                 >
                     <BackIcon />
                 </BackButton>

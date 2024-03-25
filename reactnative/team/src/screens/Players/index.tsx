@@ -2,30 +2,35 @@ import Header from "@components/Header";
 import HighLight from "@components/Higthlight";
 import { ButtonIcon } from "@components/ButtonIcon";
 
-import { Container, Form, HeaderList } from "./style";
+import { Container, Form, HeaderList, NumbersOfPlayers } from "./style";
 import Input from "@components/Input";
 import { Filter } from "@components/Filter";
 import { FlatList, Alert, Keyboard } from "react-native";
 import { useState, useEffect } from "react";
 import { PlayerCard } from "@components/PlayerCard";
 import { ListEmpty } from "@components/ListEmpty";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { AppError } from "@utils/error/appError";
 import { playerAddByGroup } from "@storage/player/playerAddByGroup";
 import { playerGetByGroup } from "@storage/player/playerGetByGroup";
 import { playerGetByGroupAndTeam } from "@storage/player/playerGetByGroupAndteam";
 import { PlayerStorageDTO } from "@storage/player/PlayerStorageDTO";
 import { playerRemoveByGroup } from "@storage/player/playerRemoveByGroup";
+import { Button } from "@components/Button";
+import { groupRemoveByName } from "@storage/group/groupRemoveByName";
+import Loading from "@components/Loading";
 
 
 type RouteParams = {
     group: string
 }
 export function Players() {
+    const [isLoading, setIsLoading] = useState(true)
     const [newPlayerName, setNewPlayerName] = useState('')
     const [team, setTeam] = useState('Time A')
     const [players, setPlayers] = useState<PlayerStorageDTO[]>([])
     const routes = useRoute()
+    const navigation = useNavigation()
 
     const { group } = routes.params as RouteParams
 
@@ -59,8 +64,10 @@ export function Players() {
 
     async function fetchPlayers() {
         try {
+            setIsLoading(true)
             const playersByTeam = await playerGetByGroupAndTeam(group, team)
             setPlayers(playersByTeam)
+            setIsLoading(false)
         } catch (error) {
             console.log(error)
         }
@@ -73,6 +80,24 @@ export function Players() {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    async function groupRemove() {
+        try {
+          //console.log('passei aqui1')
+          await groupRemoveByName(group);
+          navigation.navigate("Groups");
+        } catch (error) {
+          console.log(error);
+          Alert.alert("Remover grupo", "Não foi possível remover o grupo.");
+        }
+      }
+
+    async function handleGroupRemove() {
+        Alert.alert("Remover", "Deseja remover o grupo?", [
+            { text: "Não", style: "cancel" },
+            { text: "Sim", onPress: () => groupRemove() },
+          ]);
     }
 
     useEffect(() => {
@@ -113,9 +138,12 @@ export function Players() {
                     )}
                     horizontal
                 />
+                <NumbersOfPlayers>{players.length}</NumbersOfPlayers>
             </HeaderList>
 
-            <FlatList
+            {
+                isLoading ? <Loading />:
+                <FlatList
                 data={players}
                 keyExtractor={item => item.name}
                 renderItem={({ item }) => (
@@ -135,7 +163,13 @@ export function Players() {
                     players.length === 0 && { flex: 1 }
                 ]}
             />
+            }
 
+            <Button 
+                title="Remover Turma"
+                type="SECONDARY"
+                onPress={handleGroupRemove}
+            />
 
         </Container>
     )
