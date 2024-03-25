@@ -16,7 +16,9 @@ export function ButtonIcon({ icon, type = 'PRIMARY', ...rest }: Props) {
             <MaterialIcons
                 color={type === 'PRIMARY' ? COLORS.GREEN_700 : COLORS.RED_DARK}
                 name={icon}
-                type={type} />
+                type={type} 
+                size={24}
+                />
         </Container>
     )
 }
