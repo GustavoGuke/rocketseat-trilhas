@@ -1,7 +1,7 @@
 import { createConfig } from "@gluestack-style/react";
 
 
-export const THEME = createConfig({
+export const config = createConfig({
 
     aliases: {
         bg: "backgroundColor",
@@ -52,13 +52,13 @@ export const THEME = createConfig({
             14: 56,
             33: 148
         }
-
     }
 
 })
 
-type ConfigType = typeof THEME
+type Config = typeof config;
 
-declare module '@gluestack-style/react' {
-    interface ICustomConfig extends ConfigType {}
+
+declare module '@gluestack-ui/themed' {
+  interface UIConfig extends Config {}
 }
