@@ -28,7 +28,7 @@ const tokens = createTokens({
         body: 'Roboto_400Regular',
     },
 
-    fontSizes: {
+    fontSize: {
         xs: 12,
         sm: 14,
         md: 16,
@@ -40,10 +40,15 @@ const tokens = createTokens({
         14: 56,
         33: 148
     },
-    space: {}, // You need to add space properties here
-    size: {}, // You need to add size properties here
-    radius: {}, // You need to add radius properties here
-    zIndex: {}, // You need to add zIndex properties here
+    size: {
+        sm: 2,
+        md: 10,
+        true: 10, // this means "md" is your default size
+        lg: 20,
+    }, // You need to add size properties here
+    space: {  '$-1': -5, '$-2': -10, true: 10 }, // You need to add space properties here
+    radius: { 0: 0, 1: 3, true:3},
+    zIndex: { 0: 0, 1: 100, 2: 200, true: 200 },
 })
 export const tamaguiConfig = createTamagui({
     ...config,

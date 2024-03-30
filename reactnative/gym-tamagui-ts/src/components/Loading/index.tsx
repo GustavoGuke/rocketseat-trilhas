@@ -1,9 +1,9 @@
 
-import { Spinner, YStack } from "tamagui";
+import { Spinner, YStack, XStack } from "tamagui";
 
 export function Loading() {
     return (
-        <YStack>
+        <YStack flex={1} alignItems="center" justifyContent="center">
             <Spinner size="large" color={"$greenClaro"} />
         </YStack>
     )
