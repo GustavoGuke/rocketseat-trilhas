@@ -7,12 +7,11 @@ export function Input({ ...rest }: InputProps) {
             bg={"$gray500"}
             placeholderTextColor={"$gray300"}
             px={16}
-            width={'90%'}
+            width={'100%'}
             borderRadius={8}
             color={'white'}
-            fontFamily={'$body'}
             fontSize={'$6'}
-            height={44}
+            height={54}
             mt={20}
             focusStyle={{
                 borderWidth: 1,
