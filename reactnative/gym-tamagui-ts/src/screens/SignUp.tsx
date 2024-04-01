@@ -1,3 +1,6 @@
+import { useNavigation } from '@react-navigation/native'
+import { AuthNavigationRoutesProps } from '@routes/auth.routes'
+
 import { XStack, YStack, Image, Heading, Text, View, ScrollView } from 'tamagui'
 
 import LogoSvg from '@assets/logo.svg'
@@ -5,6 +8,7 @@ import BackgroundImg from '@assets/background.png'
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
 export function SignUp() {
+    const navigation = useNavigation<AuthNavigationRoutesProps>()
     return (
         <ScrollView
 
@@ -14,6 +18,7 @@ export function SignUp() {
             <XStack flex={1} bg={'$gray600'} px={16}>
                 <Image
                     source={BackgroundImg}
+                    defaultSource={BackgroundImg}
                     alt='Pessoas treinando'
                     resizeMode='contain'
                     position='absolute'
@@ -52,7 +57,9 @@ export function SignUp() {
                     <Button
                         mt={94}
                         title='Voltar para o login' 
-                        variant='outlined' />
+                        variant='outlined' 
+                        onPress={() => navigation.goBack()}
+                    />
                 </View>
             </XStack>
         </ScrollView>

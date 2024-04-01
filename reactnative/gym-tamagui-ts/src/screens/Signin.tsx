@@ -1,3 +1,5 @@
+import { useNavigation } from '@react-navigation/native'
+import { AuthNavigationRoutesProps } from '@routes/auth.routes'
 import { XStack, YStack, Image, Heading, Text, View, ScrollView } from 'tamagui'
 
 import LogoSvg from '@assets/logo.svg'
@@ -5,6 +7,8 @@ import BackgroundImg from '@assets/background.png'
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
 export function Signin() {
+    const navigation = useNavigation<AuthNavigationRoutesProps>()
+
     return (
         <ScrollView
 
@@ -14,6 +18,7 @@ export function Signin() {
             <XStack flex={1} bg={'$gray600'} px={16}>
                 <Image
                     source={BackgroundImg}
+                    defaultSource={BackgroundImg}
                     alt='Pessoas treinando'
                     resizeMode='contain'
                     position='absolute'
@@ -28,7 +33,7 @@ export function Signin() {
                         Treine sua mente e seu corpo
                     </Text>
 
-                    <Heading mt={96} color={'$gray100'} fontSize={24} fontFamily={'$heading'}>
+                    <Heading mt={96} color={'$gray100'} fontSize={20} fontFamily={'$heading'}>
                         Acesse sua conta
                     </Heading>
                     <Input
@@ -50,7 +55,10 @@ export function Signin() {
                     >
                         Ainda não tem acesso?
                     </Text>
-                    <Button title='Criar conta' variant='outlined' />
+                    <Button
+                        title='Criar conta'
+                        variant='outlined' 
+                        onPress={() => navigation.navigate('signUp')}/>
                 </View>
             </XStack>
         </ScrollView>
