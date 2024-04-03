@@ -41,13 +41,35 @@ const tokens = createTokens({
         33: 148
     },
     size: {
-        sm: 2,
-        md: 10,
-        true: 10, // this means "md" is your default size
-        lg: 20,
+        true: 64, // this means "md" is your default size
+        4:4,
+        8:8,
+        24: 24,
+        28: 28,
+        32: 32,
+        36: 36,
+        40: 40,
+        44: 44,
+        48: 48,
+        52: 52,
+        64: 64,
+        74: 74,
+        84: 84,
+        94: 94,
+        104:104,
+        11: 124,
+        12: 144,
+        13: 164,
+        14: 184,
+        15: 204,
+        16: 224,
+        17: 224,
+        18: 244,
+        19: 264,
+        20: 284,
     }, // You need to add size properties here
-    space: {  '$-1': -5, '$-2': -10, true: 10 }, // You need to add space properties here
-    radius: { 0: 0, 1: 3, true:3},
+    space: { 0.5: -5, 0.8: -10, true: 10, 1:20, 2:28, 4:40 }, // You need to add space properties here
+    radius: { 0: 0, 1: 3, true: 3 },
     zIndex: { 0: 0, 1: 100, 2: 200, true: 200 },
 })
 export const tamaguiConfig = createTamagui({
