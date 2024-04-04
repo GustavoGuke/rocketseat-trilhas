@@ -69,7 +69,7 @@ const tokens = createTokens({
         20: 284,
     }, // You need to add size properties here
     space: { 0.5: -5, 0.8: -10, true: 10, 1:20, 2:28, 4:40 }, // You need to add space properties here
-    radius: { 0: 0, 1: 3, true: 3 },
+    radius: { 0: 0, 1: 3, 8:8, true: 3 },
     zIndex: { 0: 0, 1: 100, 2: 200, true: 200 },
 })
 export const tamaguiConfig = createTamagui({
