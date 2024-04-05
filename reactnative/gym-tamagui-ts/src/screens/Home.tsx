@@ -8,6 +8,7 @@ import { ExerciseCard } from '@components/ExerciseCard';
 
 export function Home() {
     const [groups, setGroups] = useState(["Perna", "Costa", "Triceps", "Ombro"])
+    const [exercise, setExercise] = useState(["Remada unilateral", "Puxada Frontal", "levantamento", "corrida", "Puxada Frontal2", "levantamento2", "corrida2"])
     const [selected, setSelected] = useState("Perna")
 
     return (
@@ -38,11 +39,20 @@ export function Home() {
             <YStack flex={1} paddingHorizontal={15} marginVertical={15} >
                 <XStack alignItems='center' justifyContent='space-between'>
                     <Heading color={"$gray200"} fontSize={'$6'}>Exercicios</Heading>
-                    <Text color={"$gray200"} fontSize={'$5'}>5</Text>
+                    <Text color={"$gray200"} fontSize={'$5'}>{exercise.length}</Text>
                 </XStack>
 
-                <ExerciseCard />
-                <ExerciseCard />
+
+                <FlatList
+                    data={exercise}
+                    keyExtractor={item => item}
+                    renderItem={({ item }) => (
+                        <ExerciseCard exercise={item} />
+                    )}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{ paddingBottom: 25 }}
+                />
+
             </YStack>
 
 
