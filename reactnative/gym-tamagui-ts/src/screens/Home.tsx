@@ -4,6 +4,8 @@ import { Group } from "@components/Group";
 import { HomeHeader } from "@components/HomeHeader";
 import { YStack, Text, XStack, Heading } from "tamagui";
 import { ExerciseCard } from '@components/ExerciseCard';
+import { useNavigation } from '@react-navigation/native';
+import { AppNavigatorRoutesProps } from '@routes/app.routes';
 
 
 export function Home() {
@@ -11,12 +13,14 @@ export function Home() {
     const [exercise, setExercise] = useState(["Remada unilateral", "Puxada Frontal", "levantamento", "corrida", "Puxada Frontal2", "levantamento2", "corrida2"])
     const [selected, setSelected] = useState("Perna")
 
+    const navigation = useNavigation<AppNavigatorRoutesProps>()
+    function handleOpenExerciseDetails() {
+        navigation.navigate('Exercise')
+    }
+
     return (
         <YStack flex={1} >
             <HomeHeader />
-
-
-
             <YStack>
                 <FlatList
                     data={groups}
@@ -47,17 +51,14 @@ export function Home() {
                     data={exercise}
                     keyExtractor={item => item}
                     renderItem={({ item }) => (
-                        <ExerciseCard exercise={item} />
+                        <ExerciseCard 
+                            onPress={handleOpenExerciseDetails} exercise={item} />
                     )}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ paddingBottom: 25 }}
                 />
 
             </YStack>
-
-
-
-
         </YStack>
     );
 }
