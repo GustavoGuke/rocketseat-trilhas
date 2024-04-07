@@ -17,6 +17,7 @@ export function ExerciseCard({exercise,...rest}: Props){
                     height={76}
                     borderRadius={8}
                     marginRight={8}
+                    resizeMode='cover'
                 />
 
                 <YStack flex={1}>

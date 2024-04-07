@@ -4,11 +4,12 @@ export function HistoryCard() {
     return (
         <XStack bg="$gray500"
             alignItems='center'
-            justifyContent="space-between" paddingVertical={8}
+            justifyContent="space-between" 
+            paddingVertical={8}
             paddingHorizontal={20}
             borderRadius={8}
             marginBottom={20}>
-            <YStack marginRight={20}>
+            <YStack marginRight={20} flex={1}>
                 <Heading
                     color={"white"}
                     fontSize={"$5"}

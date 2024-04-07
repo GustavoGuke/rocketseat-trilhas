@@ -5,7 +5,41 @@ import { UserPhoto } from "@components/UserPhoto";
 import { TouchableOpacity } from "react-native";
 import { YStack, Text, ScrollView, XStack, Heading, View } from "tamagui";
 
+import userNeverPhoto from "@assets/userPhotoDefault.png"
+import * as ImagePicker from 'expo-image-picker';
+import { useState } from "react";
+
+import * as FileSystem from 'expo-file-system';
 export function Profile() {
+    const [photoUser, setPhotoUser] = useState(userNeverPhoto);
+
+    async function handleSelectImage() {
+        try {
+            const photoSelected = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [4, 4],
+                quality: 1
+            })
+
+            if (photoSelected.canceled) {
+                return;
+            }
+            if (photoSelected.assets[0].uri) {
+                const photoInfo = await FileSystem.getInfoAsync(photoSelected.assets[0].uri)
+
+                if (photoInfo.exists && (photoInfo.size / 1024 / 1024)> 5) {
+                    return alert("Essa imagem e muito grande. Escolha uma de ate 5MB")
+                }
+                setPhotoUser(photoSelected.assets[0].uri)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+       
+        //await ImagePicker.launchCameraAsync()
+    }
+
     return (
         <YStack flex={1} >
             <ScreenHeader title="Perfil" />
@@ -13,10 +47,10 @@ export function Profile() {
                 <YStack alignItems="center" justifyContent="center" marginTop={20}>
                     <UserPhoto
                         size={140}
-                        src="https://github.com/GustavoGuke.png"
+                        src={photoUser}
                     />
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleSelectImage}>
                         <Text
                             marginBottom={20}
                             marginTop={10}
