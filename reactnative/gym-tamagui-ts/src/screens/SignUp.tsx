@@ -7,7 +7,9 @@ import LogoSvg from '@assets/logo.svg'
 import BackgroundImg from '@assets/background.png'
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
+import { useForm, Controller } from 'react-hook-form'
 export function SignUp() {
+    const {control} = useForm()
     const navigation = useNavigation<AuthNavigationRoutesProps>()
     return (
         <ScrollView
