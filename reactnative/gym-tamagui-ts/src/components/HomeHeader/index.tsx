@@ -13,7 +13,7 @@ export function HomeHeader() {
             <UserPhoto size={70} src={imagem ? imagem : userSemPhoto} />
             <YStack flex={1} >
                 <Text fontSize={'$2'} color="white">Olá,</Text>
-                <Heading fontSize={'$4'} color="white">Gustavo</Heading>
+                <Heading fontSize={'$4'} color="white" fontFamily={"$heading"}>Gustavo</Heading>
             </YStack>
             <Button
                 bg="$gray500"

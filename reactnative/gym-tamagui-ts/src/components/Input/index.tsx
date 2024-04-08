@@ -1,5 +1,7 @@
 import { Input as TamaguiInput, InputProps } from 'tamagui'
 
+
+
 export function Input({ ...rest }: InputProps) {
     return (
         <TamaguiInput
@@ -10,7 +12,7 @@ export function Input({ ...rest }: InputProps) {
             width={'100%'}
             borderRadius={8}
             color={'white'}
-            fontSize={'$6'}
+            fontSize={'$4'}
             height={54}
             mt={20}
             focusStyle={{
