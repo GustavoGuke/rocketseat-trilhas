@@ -1,10 +1,11 @@
-import { AddTodo } from "./components/AddTodo"
-import { TodoList } from "./components/TodoList"
+// import { AddTodo } from "./components/AddTodo"
+// import { TodoList } from "./components/TodoList"
 
 import { Provider as ReduxProvider } from "react-redux"
 import { store } from "./store"
 import { Players } from "./pages/Players"
 
+import './index.css'
 /*
 redux criar store
 depois chamar o provider
