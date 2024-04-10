@@ -12,7 +12,9 @@ import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 
-
+import {api} from '@services/api'
+import axios from 'axios'
+import { Alert } from 'react-native'
 
 type FormDataTypeProps = {
     name: string
@@ -36,8 +38,34 @@ export function SignUp() {
     const navigation = useNavigation<AuthNavigationRoutesProps>()
 
 
-    function handleSignUp(data: FormDataTypeProps) {
-        console.log(data)
+    async function handleSignUp({ name, email, password }: FormDataTypeProps) {
+
+        try {
+            const response = await api.post('/users', { name, email, password })
+            console.log(response.data)
+        } catch (error) {
+            if(axios.isAxiosError(error)) {
+                Alert.alert('Erro', error.response?.data.message)
+            }
+        }
+
+        
+        // fetch('http://192.168.18.7:3333/users', {
+        //     method: 'POST',
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         name,
+        //         email,
+        //         password
+        //     })
+        // })
+        //     .then((response) => response.json())
+        //     .then((json) => console.log(json))
+        //     .catch((error) => console.error(error))
+            
     }
 
     return (
