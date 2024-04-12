@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { AuthNavigationRoutesProps } from '@routes/auth.routes'
 
-import { XStack, YStack, Image, Heading, Text, View, ScrollView } from 'tamagui'
+import { XStack, Image, Heading, Text, View, ScrollView } from 'tamagui'
 
 import LogoSvg from '@assets/logo.svg'
 import BackgroundImg from '@assets/background.png'
@@ -12,9 +12,10 @@ import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 
-import {api} from '@services/api'
-import axios from 'axios'
+import { api } from '@services/api'
+
 import { Alert } from 'react-native'
+import { AppError } from '@utils/AppError'
 
 type FormDataTypeProps = {
     name: string
@@ -44,12 +45,17 @@ export function SignUp() {
             const response = await api.post('/users', { name, email, password })
             console.log(response.data)
         } catch (error) {
-            if(axios.isAxiosError(error)) {
-                Alert.alert('Erro', error.response?.data.message)
-            }
+            const isAppError = error instanceof AppError
+            const title = isAppError ? error.message : "Não foi possivel criar a conta"
+
+            Alert.alert('Erro', title)
+
+            // if(axios.isAxiosError(error)) {
+            //     Alert.alert('Erro', error.response?.data.message)
+            // }
         }
 
-        
+
         // fetch('http://192.168.18.7:3333/users', {
         //     method: 'POST',
         //     headers: {
@@ -65,7 +71,7 @@ export function SignUp() {
         //     .then((response) => response.json())
         //     .then((json) => console.log(json))
         //     .catch((error) => console.error(error))
-            
+
     }
 
     return (

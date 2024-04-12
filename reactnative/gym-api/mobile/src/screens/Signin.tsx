@@ -1,14 +1,28 @@
 import { useNavigation } from '@react-navigation/native'
 import { AuthNavigationRoutesProps } from '@routes/auth.routes'
-import { XStack, YStack, Image, Heading, Text, View, ScrollView } from 'tamagui'
+import { XStack, Image, Heading, Text, View, ScrollView } from 'tamagui'
 
 import LogoSvg from '@assets/logo.svg'
 import BackgroundImg from '@assets/background.png'
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
+import { useState } from 'react'
+import { useAuth } from '@hooks/useAuth'
+
+
+
+
 export function Signin() {
     const navigation = useNavigation<AuthNavigationRoutesProps>()
+    const [login, setLogin] = useState("")
+    const [password, setPassword] = useState("")
+    const {signin} = useAuth()
 
+
+    async function handleSignin() {
+        await signin(login, password)
+        console.log(`Login: ${login} - Senha: ${password}`)
+    }
     return (
         <ScrollView
 
@@ -40,13 +54,20 @@ export function Signin() {
                         fontFamily={'$body'}
                         placeholder='E-mail'
                         keyboardType='email-address'
+                        value={login}
+                        onChangeText={setLogin}
                     />
                     <Input
                         fontFamily={'$body'}
                         placeholder='Senha'
+                        value={password}
+                        onChangeText={setPassword}
                         secureTextEntry
                     />
-                    <Button title='Acessar' />
+                    <Button
+                        title='Acessar'
+                        onPress={handleSignin}    
+                    />
                     <Text
                         mt={50}
                         color={'$gray200'}
@@ -57,8 +78,8 @@ export function Signin() {
                     </Text>
                     <Button
                         title='Criar conta'
-                        variant='outlined' 
-                        onPress={() => navigation.navigate('signUp')}/>
+                        variant='outlined'
+                        onPress={() => navigation.navigate('signUp')} />
                 </View>
             </XStack>
         </ScrollView>
