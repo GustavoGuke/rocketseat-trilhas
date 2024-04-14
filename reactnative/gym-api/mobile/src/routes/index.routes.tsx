@@ -4,6 +4,8 @@ import { View, useTheme } from 'tamagui';
 import { useAuth } from '@hooks/useAuth';
 
 import { AuthRoutes } from './auth.routes';
+import { AppRoutes } from './app.routes';
+import { Loading } from '@components/Loading';
 
 
 
@@ -12,14 +14,17 @@ export function Routes() {
     const theme = DefaultTheme
     theme.colors.background = colors?.gray[600];
 
-    const {user} = useAuth()
+    const {user, loadingStorageUse} = useAuth()
     
-    console.log(user)
+    if(loadingStorageUse){
+       return <Loading />
+    }
+    console.log("Usuario logado => ",user)
 
     return (
         <View flex={1} bg={'$gray600'}>
             <NavigationContainer theme={theme}>
-                <AuthRoutes />
+                {user.id ? <AppRoutes /> : <AuthRoutes />}
             </NavigationContainer>
         </View>
     );

@@ -1,3 +1,4 @@
+
 import { useNavigation } from '@react-navigation/native'
 import { AuthNavigationRoutesProps } from '@routes/auth.routes'
 import { XStack, Image, Heading, Text, View, ScrollView } from 'tamagui'
@@ -8,20 +9,35 @@ import { Input } from '@components/Input'
 import { Button } from '@components/Button'
 import { useState } from 'react'
 import { useAuth } from '@hooks/useAuth'
+import { AppError } from '@utils/AppError'
 
 
-
+type FormData = {
+    email: string;
+    password: string;
+}
 
 export function Signin() {
     const navigation = useNavigation<AuthNavigationRoutesProps>()
-    const [login, setLogin] = useState("")
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    
     const {signin} = useAuth()
 
 
-    async function handleSignin() {
-        await signin(login, password)
-        console.log(`Login: ${login} - Senha: ${password}`)
+    async function handleSignin({email, password}: FormData) {
+        
+        console.log(`Login: ${email} - Senha: ${password}`)
+        try {
+            await signin(email, password)
+            
+        } catch (error) {
+            
+            const isAppError = error instanceof AppError
+            const title = isAppError ? error.message : 'Não foi possível entrar. Tente novamente mais tarde.'
+            alert(title)
+            console.log(error)
+        }
     }
     return (
         <ScrollView
@@ -54,8 +70,8 @@ export function Signin() {
                         fontFamily={'$body'}
                         placeholder='E-mail'
                         keyboardType='email-address'
-                        value={login}
-                        onChangeText={setLogin}
+                        value={email}
+                        onChangeText={setEmail}
                     />
                     <Input
                         fontFamily={'$body'}
@@ -65,8 +81,9 @@ export function Signin() {
                         secureTextEntry
                     />
                     <Button
-                        title='Acessar'
-                        onPress={handleSignin}    
+                        title='Acessarr'
+                        onPress={() => handleSignin({email, password})}   
+                         
                     />
                     <Text
                         mt={50}
@@ -77,6 +94,7 @@ export function Signin() {
                         Ainda não tem acesso?
                     </Text>
                     <Button
+                        
                         title='Criar conta'
                         variant='outlined'
                         onPress={() => navigation.navigate('signUp')} />

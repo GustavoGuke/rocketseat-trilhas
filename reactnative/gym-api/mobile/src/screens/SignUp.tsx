@@ -16,6 +16,7 @@ import { api } from '@services/api'
 
 import { Alert } from 'react-native'
 import { AppError } from '@utils/AppError'
+import { useAuth } from '@hooks/useAuth'
 
 type FormDataTypeProps = {
     name: string
@@ -33,6 +34,7 @@ const schema = yup
     })
 
 export function SignUp() {
+    const {signin} = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm<FormDataTypeProps>({
         resolver: yupResolver(schema)
     })
@@ -42,8 +44,8 @@ export function SignUp() {
     async function handleSignUp({ name, email, password }: FormDataTypeProps) {
 
         try {
-            const response = await api.post('/users', { name, email, password })
-            console.log(response.data)
+            await api.post('/users', { name, email, password })
+            await signin(email, password)
         } catch (error) {
             const isAppError = error instanceof AppError
             const title = isAppError ? error.message : "Não foi possivel criar a conta"
