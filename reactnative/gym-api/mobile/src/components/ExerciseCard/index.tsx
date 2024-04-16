@@ -1,18 +1,19 @@
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import { Image, YStack, XStack, Heading, Text } from 'tamagui'
 import { MaterialIcons } from "@expo/vector-icons"
-import img from '@assets/background.png'
+import { ExeciseDTO } from '@dtos/ExeciseDTO'
 
 type Props = TouchableOpacityProps & {
-    exercise: string
+    exercise: ExeciseDTO
 }
+import { api } from '@services/api'
 
 export function ExerciseCard({exercise,...rest}: Props){
     return (
         <TouchableOpacity {...rest}>
             <XStack backgroundColor={"$gray500"} alignItems='center' padding={2} paddingRight={4} borderRadius={4} marginBottom={20}>
                 <Image 
-                    source={img}
+                    source={{uri: `${api.defaults.baseURL}/exercise/demo/${exercise.demo}`}}
                     w={76}
                     height={76}
                     borderRadius={8}
@@ -21,8 +22,8 @@ export function ExerciseCard({exercise,...rest}: Props){
                 />
 
                 <YStack flex={1}>
-                    <Heading color={"$gray200"} fontSize={'$7'}>{exercise}</Heading>
-                    <Text color={"$gray200"} fontSize={'$3'} numberOfLines={2}>3 Séries x 17 repetições</Text>
+                    <Heading color={"$gray200"} fontSize={'$7'}>{exercise.name}</Heading>
+                    <Text color={"$gray200"} fontSize={'$3'} numberOfLines={2}>{exercise.series} series x {exercise.repetitions} repetições</Text>
                 </YStack>
 
                 <MaterialIcons

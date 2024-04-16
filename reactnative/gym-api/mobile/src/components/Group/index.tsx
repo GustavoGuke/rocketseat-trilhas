@@ -23,7 +23,7 @@ export function Group({ name, isActive, ...rest }: Props) {
             <Text
                 color={isActive? "$greenClaro": "$gray200"}
                 textTransform="uppercase"
-                fontSize={"$5"}
+                fontSize={"$1"}
                 fontWeight={"bold"}
             >
                 {name}
