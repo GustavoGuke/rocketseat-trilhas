@@ -13,7 +13,7 @@ export function ExerciseCard({exercise,...rest}: Props){
         <TouchableOpacity {...rest}>
             <XStack backgroundColor={"$gray500"} alignItems='center' padding={2} paddingRight={4} borderRadius={4} marginBottom={20}>
                 <Image 
-                    source={{uri: `${api.defaults.baseURL}/exercise/demo/${exercise.demo}`}}
+                    source={{uri: `${api.defaults.baseURL}/exercise/thumb/${exercise.thumb}`}}
                     w={76}
                     height={76}
                     borderRadius={8}
