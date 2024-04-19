@@ -27,7 +27,7 @@ export function Signin() {
 
     async function handleSignin({email, password}: FormData) {
         
-        console.log(`Login: ${email} - Senha: ${password}`)
+        //console.log(`Login: ${email} - Senha: ${password}`)
         try {
             await signin(email, password)
             
