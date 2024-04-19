@@ -97,7 +97,7 @@ export function Signin() {
                         
                         title='Criar conta'
                         variant='outlined'
-                        onPress={() => navigation.navigate('signUp')} />
+                        onPress={() => navigation.navigate('signIn')} />
                 </View>
             </XStack>
         </ScrollView>

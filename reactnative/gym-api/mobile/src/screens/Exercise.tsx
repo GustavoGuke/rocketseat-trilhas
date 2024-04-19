@@ -2,7 +2,6 @@ import { YStack, Text, XStack, Heading, Image, ScrollView } from "tamagui";
 import { MaterialIcons } from "@expo/vector-icons"
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-import img from '@assets/background.png'
 import BodySvg from "@assets/body.svg"
 import SeriesSvg from "@assets/series.svg"
 import RepetitionsSvg from "@assets/repetitions.svg"
@@ -14,16 +13,17 @@ import { ExeciseDTO } from "@dtos/ExeciseDTO";
 import { useEffect, useState } from "react";
 import { Loading } from "@components/Loading";
 
-
+import { AppNavigatorRoutesProps } from "@routes/app.routes";
 type RouteProps = {
     exerciseId: string
 }
 export function Exercise() {
+    const [sendingRegister, setSendingRegister] = useState(false)
     const [exercise, setExercise] = useState<ExeciseDTO>({} as ExeciseDTO)
     const [isLoading, setIsLoading] = useState(true)
     const route = useRoute()
     const { exerciseId } = route.params as RouteProps
-    const navigation = useNavigation()
+    const navigation = useNavigation<AppNavigatorRoutesProps>()
 
     async function fetchExerciseDetails() {
         try {
@@ -36,6 +36,21 @@ export function Exercise() {
             alert(title)
         } finally {
             setIsLoading(false)
+        }
+    }
+
+    async function handleExerciseHistoryRegister() {
+        try {
+            setSendingRegister(true)
+            await api.post('/history', { exercise_id: exerciseId })
+            alert('Exercício registrado no seu historico!')
+            navigation.navigate('History')
+        } catch (error) {
+            const isAppError = error instanceof AppError
+            const title = isAppError ? error.message : 'Não foi possível registrar o exercício. Tente novamente mais tarde.'
+            alert(title)
+        } finally {
+            setSendingRegister(false)
         }
     }
 
@@ -114,7 +129,10 @@ export function Exercise() {
                                     </XStack>
 
                                 </XStack>
-                                <Button title="Adicionar repetições" />
+                                <Button
+                                    onPress={handleExerciseHistoryRegister} 
+                                    title="Marcar como realizado"
+                                     />
                             </YStack>
                         </YStack>
                     </ScrollView>
