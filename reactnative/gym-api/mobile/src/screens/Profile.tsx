@@ -3,6 +3,8 @@ import { Input } from "@components/Input";
 import { ScreenHeader } from "@components/ScreenHeader";
 import { UserPhoto } from "@components/UserPhoto";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { TouchableOpacity } from "react-native";
 import { YStack, Text, ScrollView, Heading, View } from "tamagui";
@@ -21,14 +23,33 @@ type FormDataTypeProps = {
     password: string;
     password_confirm: string;
 }
+const profileSchema = yup.object({
+    name: yup.string().required('Nome obrigatorio'),
+    password: yup
+        .string()
+        .min(6, 'No minimo 6 digitos')
+        .nullable()
+        .transform((value) => (!!value ? value : null)),
+    password_confirm: yup
+        .string()
+        .nullable()
+        .oneOf([yup.ref('password'), null], 'As senhas devem ser iguais')
+        .transform((value) => (!!value ? value : null))
+        .when('password', {
+            is: (Field: any) => Field,
+            then: (schema) => schema.nullable().required('Confirme a senha').transform((value) => (!!value ? value : null)),
+        })
+
+})
 export function Profile() {
     const [photoUser, setPhotoUser] = useState(userNeverPhoto);
-    const {user} = useAuth()
-    const { control } = useForm<FormDataTypeProps>({
+    const { user } = useAuth()
+    const { control, handleSubmit, formState: { errors } } = useForm<FormDataTypeProps>({
         defaultValues: {
             name: user.name,
             email: user.email
-        }
+        },
+        resolver: yupResolver(profileSchema)
     });
 
     async function handleSelectImage() {
@@ -56,6 +77,10 @@ export function Profile() {
         }
 
         //await ImagePicker.launchCameraAsync()
+    }
+
+    async function handleProfileUpdate(data: FormDataTypeProps) {
+        console.log(data)
     }
 
     return (
@@ -86,6 +111,7 @@ export function Profile() {
                             name="name"
                             render={({ field: { value, onChange } }) => (
                                 <Input
+                                    
                                     bg={"$gray400"}
                                     placeholder="Nome"
                                     value={value}
@@ -93,6 +119,9 @@ export function Profile() {
                                 />
                             )}
                         />
+                        <Text color={"$red500"}>
+                            {errors.name?.message}
+                        </Text>
 
                         <Controller
                             control={control}
@@ -117,22 +146,59 @@ export function Profile() {
                         marginBottom={-20}
                     >Alterar senha</Heading>
 
-                    <Input
-                        bg={"$gray400"}
-                        placeholder="Senha atual"
-                        secureTextEntry
+                    <Controller
+                        control={control}
+                        name="old_password"
+                        render={({ field: { onChange } }) => (
+                            <Input
+                                bg={"$gray400"}
+                                placeholder="Senha atual"
+                                secureTextEntry
+                                onChangeText={onChange}
+                            />
+                        )}
                     />
-                    <Input
-                        bg={"$gray400"}
-                        placeholder="Senha"
-                        secureTextEntry
+
+
+                    <Controller
+                        control={control}
+                        name="password"
+                        render={({ field: { onChange } }) => (
+                            <Input
+                                bg={"$gray400"}
+                                placeholder="Senha"
+                                secureTextEntry
+                                onChangeText={onChange}
+                            />
+                        )}
                     />
-                    <Input
-                        bg={"$gray400"}
-                        placeholder="Confirmar senha"
-                        secureTextEntry
+
+                    <Text color={"$red500"}>
+                        {errors.password?.message}
+                    </Text>
+
+                    <Controller
+                        control={control}
+                        name="password_confirm"
+                        render={({ field: { onChange } }) => (
+                            <Input
+                                bg={"$gray400"}
+                                placeholder="Confirmar senha"
+                                secureTextEntry
+                                onChangeText={onChange}
+                            />
+                        )}
                     />
-                    <Button title="Atualizar" marginTop={30} />
+
+                    <Text color={"$red500"}>
+                        {errors.password_confirm?.message}
+                    </Text>
+
+                    <Button
+                        title="Atualizar"
+                        marginTop={30}
+                        onPress={handleSubmit(handleProfileUpdate)}
+                    />
                 </YStack>
 
             </ScrollView>
