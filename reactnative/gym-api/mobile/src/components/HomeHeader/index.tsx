@@ -4,6 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons"
 
 import userSemPhoto from "@assets/userPhotoDefault.png"
 import { useAuth } from '@hooks/useAuth'
+import { api } from '@services/api'
 
 const imagem = ''
 
@@ -12,7 +13,7 @@ export function HomeHeader() {
     return (
 
         <XStack bg="$gray500" pt={96} pb={20} px={30} alignItems='center' >
-            <UserPhoto size={70} src={user.avatar ? user.avatar : userSemPhoto} />
+            <UserPhoto size={70} src={user.avatar ? `${api.defaults.baseURL}/avatar/${user.avatar}` : userSemPhoto} />
             <YStack flex={1} >
                 <Text fontSize={'$2'} color="white">Olá,</Text>
                 <Heading fontSize={'$4'} color="white" fontFamily={"$heading"}>{user.name}</Heading>

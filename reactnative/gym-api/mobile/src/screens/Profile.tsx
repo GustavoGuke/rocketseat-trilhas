@@ -45,7 +45,7 @@ const profileSchema = yup.object({
 })
 export function Profile() {
     const [isUpdating, setIsUpdating] = useState(false)
-    const [photoUser, setPhotoUser] = useState(userNeverPhoto);
+
     const { user,updateUserProfile } = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm<FormDataTypeProps>({
         defaultValues: {
@@ -73,9 +73,33 @@ export function Profile() {
                 if (photoInfo.exists && (photoInfo.size / 1024 / 1024) > 5) {
                     return alert("Essa imagem e muito grande. Escolha uma de ate 5MB")
                 }
-                setPhotoUser(photoSelected.assets[0].uri)
+
+                const fileExtension = photoSelected.assets[0].uri.split('.').pop();
+
+                const photoFile = {
+                    name: `${user.name}.${fileExtension}`.toLowerCase(),
+                    uri: photoSelected.assets[0].uri,
+                    type: `${photoSelected.assets[0].type}/${fileExtension}`
+                } as any
+                const userPhotoUploadForm = new FormData();
+                userPhotoUploadForm.append('avatar', photoFile)
+
+                const { data } = await api.patch('/users/avatar', userPhotoUploadForm, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                alert('Foto atualizada com sucesso')
+
+                const userUpdatedPhoto = user
+                userUpdatedPhoto.avatar = data.avatar
+                updateUserProfile(userUpdatedPhoto)
+                
             }
         } catch (error) {
+            const isAppError = error instanceof AppError
+            const title = isAppError ? error.message : 'Não foi possível atualizar a foto de perfil. Tente novamente mais tarde.'
+            alert(title)
             console.log(error)
         }
 
@@ -91,7 +115,7 @@ export function Profile() {
             await api.put('/users', data)
             await updateUserProfile(userUpdated)
             alert('Perfil atualizado com sucesso')
-            //userAndTokeUpdate(userUpdated.data.user, userUpdated.data.token)
+            
         } catch (error) {
             const isAppError = error instanceof AppError
             const title = isAppError ? error.message : 'Não foi possível atualizar o perfil. Tente novamente mais tarde.'
@@ -109,7 +133,7 @@ export function Profile() {
                 <YStack alignItems="center" justifyContent="center" marginTop={15}>
                     <UserPhoto
                         size={140}
-                        src={photoUser}
+                        src={user.avatar ? `${api.defaults.baseURL}/avatar/${user.avatar}` : userNeverPhoto}
                     />
 
                     <TouchableOpacity onPress={handleSelectImage}>
