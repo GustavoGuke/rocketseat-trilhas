@@ -15,6 +15,8 @@ import { useState } from "react";
 
 import * as FileSystem from 'expo-file-system';
 import { useAuth } from "@hooks/useAuth";
+import { api } from "@services/api";
+import { AppError } from "@utils/AppError";
 
 type FormDataTypeProps = {
     name: string;
@@ -42,8 +44,9 @@ const profileSchema = yup.object({
 
 })
 export function Profile() {
+    const [isUpdating, setIsUpdating] = useState(false)
     const [photoUser, setPhotoUser] = useState(userNeverPhoto);
-    const { user } = useAuth()
+    const { user,updateUserProfile } = useAuth()
     const { control, handleSubmit, formState: { errors } } = useForm<FormDataTypeProps>({
         defaultValues: {
             name: user.name,
@@ -81,6 +84,22 @@ export function Profile() {
 
     async function handleProfileUpdate(data: FormDataTypeProps) {
         console.log(data)
+        try {
+            const userUpdated = user
+            userUpdated.name = data.name
+            setIsUpdating(true)
+            await api.put('/users', data)
+            await updateUserProfile(userUpdated)
+            alert('Perfil atualizado com sucesso')
+            //userAndTokeUpdate(userUpdated.data.user, userUpdated.data.token)
+        } catch (error) {
+            const isAppError = error instanceof AppError
+            const title = isAppError ? error.message : 'Não foi possível atualizar o perfil. Tente novamente mais tarde.'
+            alert(title)
+            console.log(error)
+        } finally {
+            setIsUpdating(false)
+        }
     }
 
     return (

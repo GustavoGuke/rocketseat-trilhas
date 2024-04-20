@@ -7,6 +7,7 @@ import { storageAuthTokenSave, storageAuthTokenGet, storageAuthTokenRemove } fro
 export type AuthContextDataProps = {
     user: UserDTO;
     signin: (email: string, password: string) => Promise<void>
+    updateUserProfile: (userUpdated: UserDTO) => Promise<void>
     signOut: () => Promise<void>
     loadingStorageUse: boolean
 }
@@ -78,6 +79,15 @@ export function AuthContextProvider({ children }: AuthContextProps) {
 
     }
 
+    async function updateUserProfile(userUpdated: UserDTO) {
+        try {
+            setUser(userUpdated)
+            await storageUserSave(userUpdated)
+        } catch (error) {
+            throw error
+        }
+    }
+
     async function loadUserStorageData() {
 
         try {
@@ -100,7 +110,7 @@ export function AuthContextProvider({ children }: AuthContextProps) {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ user, signin, loadingStorageUse, signOut }}>
+        <AuthContext.Provider value={{ user, signin, loadingStorageUse, signOut, updateUserProfile }}>
             {children}
         </AuthContext.Provider>
     )
