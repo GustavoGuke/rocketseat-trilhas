@@ -19,7 +19,7 @@ export function Routes() {
     if(loadingStorageUse){
        return <Loading />
     }
-    console.log("Usuario logado => ",user)
+    //console.log("Usuario logado => ",user)
 
     return (
         <View flex={1} bg={'$gray600'}>

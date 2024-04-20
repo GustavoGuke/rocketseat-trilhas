@@ -33,11 +33,11 @@ export function AuthContextProvider({ children }: AuthContextProps) {
         } 
     }
 
-    async function storageUserAndTokenSave(userData: UserDTO, token: string) {
+    async function storageUserAndTokenSave(userData: UserDTO, token: string, refresh_token: string) {
         try {
             setLoadingStorageUse(true)
             await storageUserSave(userData) 
-            await storageAuthTokenSave(token)
+            await storageAuthTokenSave({token, refresh_token})
 
         } catch (error) {
             throw error
@@ -48,11 +48,11 @@ export function AuthContextProvider({ children }: AuthContextProps) {
 
     async function signin(email: string, password: string) {
         try {
-            const { data } = await api.post('/sessions', { email, password })
-
-            if (data.user && data.token) {
-                setLoadingStorageUse(true)
-                await storageUserAndTokenSave(data.user, data.token)
+            const { data,  } = await api.post('/sessions', { email, password })
+            console.log(data)
+            if (data.user && data.token && data?.refresh_token) {
+                
+                await storageUserAndTokenSave(data.user, data.token, data.refresh_token)
                 userAndTokeUpdate(data.user, data.token)
             }
 
@@ -96,7 +96,7 @@ export function AuthContextProvider({ children }: AuthContextProps) {
             const token = await storageAuthTokenGet()
 
             if (token &&userLogged) {
-                userAndTokeUpdate(userLogged, token)
+                userAndTokeUpdate(userLogged, token.token)
             }
         } catch (error) {
             throw error
@@ -108,6 +108,14 @@ export function AuthContextProvider({ children }: AuthContextProps) {
     useEffect(() => {
         loadUserStorageData()
     }, [])
+
+    useEffect(() => {
+        const subscribe = api.registerInterceptorTokenManager(signOut)
+
+        return () => {
+            subscribe()
+        }
+    }, [signOut])
 
     return (
         <AuthContext.Provider value={{ user, signin, loadingStorageUse, signOut, updateUserProfile }}>
