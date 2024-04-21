@@ -1,0 +1,15 @@
+{
+  "cli": {
+    "version": ">= 7.8.2"
+  },
+  "build": {
+  
+    "preview": {
+      "android": {
+      //  "buildType": "apk"  gerar apk - gerado apenas no linux
+      "distribuition": "internal"
+      },
+      "env": {"EXPO_PUBLIC_WEATHER_APP_ID": "2155a2a8130dae11d680123a2ae3507e"}
+  }
+}
+}
