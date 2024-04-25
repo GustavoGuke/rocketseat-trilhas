@@ -7,6 +7,7 @@ import { storageAuthTokenSave, storageAuthTokenGet, storageAuthTokenRemove } fro
 export type AuthContextDataProps = {
     user: UserDTO;
     signin: (email: string, password: string) => Promise<void>
+    updateUserProfile: (userUpdated: UserDTO) => Promise<void>
     signOut: () => Promise<void>
     loadingStorageUse: boolean
 }
@@ -32,11 +33,11 @@ export function AuthContextProvider({ children }: AuthContextProps) {
         } 
     }
 
-    async function storageUserAndTokenSave(userData: UserDTO, token: string) {
+    async function storageUserAndTokenSave(userData: UserDTO, token: string, refresh_token: string) {
         try {
             setLoadingStorageUse(true)
             await storageUserSave(userData) 
-            await storageAuthTokenSave(token)
+            await storageAuthTokenSave({token, refresh_token})
 
         } catch (error) {
             throw error
@@ -48,10 +49,18 @@ export function AuthContextProvider({ children }: AuthContextProps) {
     async function signin(email: string, password: string) {
         
         try {
+<<<<<<< HEAD
             const { data } = await api.post('/sessions', { email, password })
             if (data.user && data.token) {
                 setLoadingStorageUse(true)
                 await storageUserAndTokenSave(data.user, data.token)
+=======
+            const { data,  } = await api.post('/sessions', { email, password })
+            console.log(data)
+            if (data.user && data.token && data?.refresh_token) {
+                
+                await storageUserAndTokenSave(data.user, data.token, data.refresh_token)
+>>>>>>> 4f7d802f3f15158daefabf3f6b25a6d352cb1115
                 userAndTokeUpdate(data.user, data.token)
             }
 
@@ -78,6 +87,15 @@ export function AuthContextProvider({ children }: AuthContextProps) {
 
     }
 
+    async function updateUserProfile(userUpdated: UserDTO) {
+        try {
+            setUser(userUpdated)
+            await storageUserSave(userUpdated)
+        } catch (error) {
+            throw error
+        }
+    }
+
     async function loadUserStorageData() {
 
         try {
@@ -86,7 +104,7 @@ export function AuthContextProvider({ children }: AuthContextProps) {
             const token = await storageAuthTokenGet()
 
             if (token &&userLogged) {
-                userAndTokeUpdate(userLogged, token)
+                userAndTokeUpdate(userLogged, token.token)
             }
         } catch (error) {
             throw error
@@ -99,8 +117,16 @@ export function AuthContextProvider({ children }: AuthContextProps) {
         loadUserStorageData()
     }, [])
 
+    useEffect(() => {
+        const subscribe = api.registerInterceptorTokenManager(signOut)
+
+        return () => {
+            subscribe()
+        }
+    }, [signOut])
+
     return (
-        <AuthContext.Provider value={{ user, signin, loadingStorageUse, signOut }}>
+        <AuthContext.Provider value={{ user, signin, loadingStorageUse, signOut, updateUserProfile }}>
             {children}
         </AuthContext.Provider>
     )

@@ -18,7 +18,6 @@ export function History() {
             setIsLoading(true)
             const response = await api.get('/history')
             setExercises(response.data)
-            console.log(response.data)
         } catch (error) {
             const isAppError = error instanceof AppError
             const title = isAppError ? error.message : 'Não foi possível registrar o exercício. Tente novamente mais tarde.'
@@ -27,6 +26,7 @@ export function History() {
             setIsLoading(false)
         }
     }
+    console.log(isLoading)
     useFocusEffect(useCallback(() => {
         fetchHistory()
     }, []))
