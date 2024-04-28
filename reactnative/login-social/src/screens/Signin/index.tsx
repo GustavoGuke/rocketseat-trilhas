@@ -1,11 +1,14 @@
+import { Container, Title, Slogam } from './styles';
+import backgroudImage from '../../assets/background.png'
+import { Button } from '../../components/Button';
 
-import { StyleSheet, Text, View } from 'react-native';
-
-import { styles } from './style';
 export function Signin() {
     return (
-        <View style={styles.container}>
-            <Text>Open up App.tsx to start working on your app!</Text>
-        </View>
+        <Container source={backgroudImage}>
+            <Title>Ignite Fleet</Title>
+            <Slogam>Gestão de uso de veículos</Slogam>
+
+            <Button title="Entrar" onPress={() => {}}/>
+        </Container>
     );
 }
