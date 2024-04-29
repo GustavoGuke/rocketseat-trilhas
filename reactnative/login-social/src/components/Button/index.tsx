@@ -1,7 +1,7 @@
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacityProps } from 'react-native';
 import { Container, LoadIndicator, Title } from './styles';
 
-type Props = TouchableOpacity & {
+type Props = TouchableOpacityProps & {
     title: string;
     isLoading?: boolean;
     onPress: () => void;
