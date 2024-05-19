@@ -19,21 +19,17 @@ type Props = {
 const SCREEN_WIDTH = Dimensions.get('window').width;
 export function Question({ question, alternativeSelected, setAlternativeSelected }: Props) {
 
-  const keyframe = new Keyframe({
+  const enteringKeyFrame = new Keyframe({
     0: {
-      opacity: 0,
-      transform: [
-        { translateX: SCREEN_WIDTH },
-      ]
+      //opacity: 0,
+      transform: [{ translateX: SCREEN_WIDTH }],
     },
     70: {
-      opacity: 0.3
+      //opacity: 0.3
     },
     100: {
-      opacity: 1,
-      transform: [
-        { translateX: 0 },
-      ]
+      //opacity: 1,
+      transform: [{ translateX: 0 }],
     }
   })
 
@@ -53,8 +49,11 @@ export function Question({ question, alternativeSelected, setAlternativeSelected
       ]
     }
   })
+
+
   return (
     <Animated.View
+      //entering={enteringKeyFrame}
       //exiting={exitingKeyframe}
       style={styles.container}>
       <Text style={styles.title}>
