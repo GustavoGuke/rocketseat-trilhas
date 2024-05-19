@@ -10,3 +10,6 @@
 
 gerar a pasta coveage em outro lugar adionar script o packge.json
 "coverageDirectory": "./__tests__/coverage"
+
+parar todos os testes caso um nã passe
+"bail":true
