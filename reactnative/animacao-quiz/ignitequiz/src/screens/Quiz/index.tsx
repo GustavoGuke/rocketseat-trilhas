@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, ScrollView, View } from 'react-native';
+import { Alert, ScrollView, Text, View } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -13,7 +13,9 @@ import { Question } from '../../components/Question';
 import { QuizHeader } from '../../components/QuizHeader';
 import { ConfirmButton } from '../../components/ConfirmButton';
 import { OutlineButton } from '../../components/OutlineButton';
-import Animated, { interpolate, Easing, interpolateColor, useAnimatedStyle, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
+import Animated, { interpolate, Easing, interpolateColor, useAnimatedStyle, useSharedValue, withSequence, withTiming, useAnimatedScrollHandler, Extrapolation } from 'react-native-reanimated';
+import { ProgressBar } from '../../components/ProgressBar';
+import { THEME } from '../../styles/theme';
 
 interface Params {
   id: string;
@@ -34,20 +36,22 @@ export function Quiz() {
   const { id } = route.params as Params;
 
   const sharedShake = useSharedValue(0);
+  const sharedScrollY = useSharedValue(0);
+
 
   function animatedShake() {
     sharedShake.value = withSequence(
-      withTiming(3, {duration: 400, easing: Easing.bounce} ),
+      withTiming(3, { duration: 400, easing: Easing.bounce }),
       withTiming(0),
     )
   }
-  
+
   const shakeStyleAnimated = useAnimatedStyle(() => {
     return {
       transform: [
         {
-          translateX: interpolate(sharedShake.value, 
-            [0, 0.5, 1, 1.5, 2, 2.5, 3], 
+          translateX: interpolate(sharedShake.value,
+            [0, 0.5, 1, 1.5, 2, 2.5, 3],
             [0, -15, 0, 15, 0, -15, 0]),
         }
       ],
@@ -119,6 +123,36 @@ export function Quiz() {
     return true;
   }
 
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      sharedScrollY.value = event.contentOffset.y
+    }
+  })
+
+  const fixedProgressBarStyles = useAnimatedStyle(() => {
+    return {
+      position: 'absolute',
+      zIndex: 1,
+      marginBottom: 10,
+      paddingTop: 100,
+      backgroundColor: THEME.COLORS.GREY_500,
+      width: '110%',
+      left: '-5%',
+      opacity: interpolate(sharedScrollY.value, [50, 80], [0, 1], Extrapolation.CLAMP),
+      transform: [
+        { translateY: interpolate(sharedScrollY.value, [50, 100], [-40, 0], Extrapolation.CLAMP) }
+      ]
+    }
+  })
+
+
+  const headerStyles = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(sharedScrollY.value, [40, 80], [1, 0], Extrapolation.CLAMP),
+    }
+  })
+
   useEffect(() => {
     const quizSelected = QUIZ.filter(item => item.id === id)[0];
     setQuiz(quizSelected);
@@ -137,29 +171,46 @@ export function Quiz() {
 
   return (
     <View style={styles.container}>
-      <ScrollView
+
+      <Animated.View style={fixedProgressBarStyles}>
+        <Text style={styles.title}>
+          {quiz.title}
+        </Text>
+
+        <ProgressBar
+          total={quiz.questions.length}
+          current={currentQuestion + 1}
+        />
+      </Animated.View>
+
+      <Animated.ScrollView
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.question}
       >
-        <QuizHeader
-          title={quiz.title}
-          currentQuestion={currentQuestion + 1}
-          totalOfQuestions={quiz.questions.length}
-        />
-      <Animated.View style={shakeStyleAnimated}>
-        <Question
-          key={quiz.questions[currentQuestion].title}
-          question={quiz.questions[currentQuestion]}
-          alternativeSelected={alternativeSelected}
-          setAlternativeSelected={setAlternativeSelected}
-        />
+        <Animated.View style={headerStyles}>
+          <QuizHeader
+            title={quiz.title}
+            currentQuestion={currentQuestion + 1}
+            totalOfQuestions={quiz.questions.length}
+          />
+        </Animated.View>
+
+        <Animated.View style={shakeStyleAnimated}>
+          <Question
+            key={quiz.questions[currentQuestion].title}
+            question={quiz.questions[currentQuestion]}
+            alternativeSelected={alternativeSelected}
+            setAlternativeSelected={setAlternativeSelected}
+          />
         </Animated.View>
 
         <View style={styles.footer}>
           <OutlineButton title="Parar" onPress={handleStop} />
           <ConfirmButton onPress={handleConfirm} />
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
     </View >
   );
 }
