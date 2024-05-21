@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     padding: 24
   },
   evento: {
+    paddingTop:50,
     color: '#FDFCFE',
     fontSize: 16
   },
