@@ -157,6 +157,7 @@ export function Quiz() {
 
   const onPain = Gesture
     .Pan()
+    .activateAfterLongPress(200)
     .onUpdate((event) => {
       const moveToLeft = event.translationX < 0
 
@@ -226,8 +227,8 @@ export function Quiz() {
             totalOfQuestions={quiz.questions.length}
           />
         </Animated.View>
+        
         <GestureDetector gesture={onPain}>
-
           <Animated.View style={[shakeStyleAnimated, dragStyles]}>
             <Question
               key={quiz.questions[currentQuestion].title}
