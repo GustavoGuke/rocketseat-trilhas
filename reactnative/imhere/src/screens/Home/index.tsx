@@ -6,7 +6,7 @@ import { Participant } from '../components/Participant';
 import { useState } from 'react';
 
 export default function Home() {
-    const [participants, setParticipants] = useState<string[]>([''])
+    const [participants, setParticipants] = useState<string[]>([])
     const [participantsName, setParticipantsName] = useState('')
     function handleParticipantAdd(){
         if(participants.includes(participantsName)){
