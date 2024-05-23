@@ -1,5 +1,6 @@
 import { View, Text, XStack, YStack, Heading } from "tamagui";
 
+
 export function HistoryCard() {
     return (
         <XStack bg="$gray500"
