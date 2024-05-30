@@ -20,7 +20,7 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { OverlayFeedback } from '../../components/OverlayFeedback';
 
 import { Audio } from 'expo-av';
-import { Sound } from 'expo-av/build/Audio';
+import * as Haptics from 'expo-haptics';
 
 interface Params {
   id: string;
@@ -120,6 +120,7 @@ export function Quiz() {
       
     } else {
       await playSound(false)
+      await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
       setStatusReply(2)
       animatedShake();
     }
