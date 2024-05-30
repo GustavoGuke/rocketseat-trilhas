@@ -19,6 +19,9 @@ import { THEME } from '../../styles/theme';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { OverlayFeedback } from '../../components/OverlayFeedback';
 
+import { Audio } from 'expo-av';
+import { Sound } from 'expo-av/build/Audio';
+
 interface Params {
   id: string;
 }
@@ -41,6 +44,14 @@ export function Quiz() {
   const sharedShake = useSharedValue(0);
   const sharedScrollY = useSharedValue(0);
   const sharedCardPosition = useSharedValue(0);
+
+  async function playSound(isCorrect: boolean){
+    const file = isCorrect ? require('../../assets/correct.mp3') : require('../../assets/wrong.mp3')
+    const {sound} = await Audio.Sound.createAsync(file, {shouldPlay: true})
+
+    await sound.setPositionAsync(0)
+    await sound.playAsync()
+  }
 
 
   function animatedShake() {
@@ -103,10 +114,12 @@ export function Quiz() {
     }
 
     if (quiz.questions[currentQuestion].correct === alternativeSelected) {
+      await playSound(true)
       setStatusReply(1)
       setPoints(prevState => prevState + 1);
       
     } else {
+      await playSound(false)
       setStatusReply(2)
       animatedShake();
     }
