@@ -8,7 +8,7 @@ export function Signin() {
             <Title>Ignite Fleet</Title>
             <Slogam>Gestão de uso de veículos</Slogam>
 
-            <Button title="Entrar" onPress={() => {}}/>
+            <Button title="Entrar" onPress={() => {console.log("teste")}}/>
         </Container>
     );
 }
