@@ -8,7 +8,7 @@ export default {
     BLUE_DARK: '#1E6F9F',
     BLUE: '#4EA8DE',
 
-    PURPLE_DARK: '#SE60CE',
+    PURPLE_DARK: '#5E60CE',
     PURPLE: '#8284FA',
 
     RED: '#E25858',

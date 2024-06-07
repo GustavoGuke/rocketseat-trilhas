@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { Button } from '../../components/Button';
 
 import { styles } from './styles';
+import { Trophy } from 'phosphor-react-native';
 
 interface Params {
   total: string;
@@ -19,6 +20,7 @@ export function Finish() {
   return (
     <View style={styles.container}>
       <View style={styles.message}>
+        <Trophy />
         <Text style={styles.title}>
           Parabéns!
         </Text>

@@ -8,11 +8,11 @@ import { Loading } from './src/components/Loading';
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
-  if (!fontsLoaded) {
-    return (
-      <Loading />
-    );
-  }
+  // if (!fontsLoaded) {
+  //   return (
+  //     <Loading />
+  //   );
+  // }
 
   return (
     <GestureHandlerRootView style={{flex:1}}>

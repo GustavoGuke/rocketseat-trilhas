@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Alert, ScrollView, Text, View } from 'react-native';
+import { Alert, ScrollView, Text, View, BackHandler } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -17,6 +17,10 @@ import Animated, { interpolate, Easing, interpolateColor, useAnimatedStyle, useS
 import { ProgressBar } from '../../components/ProgressBar';
 import { THEME } from '../../styles/theme';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { OverlayFeedback } from '../../components/OverlayFeedback';
+
+import { Audio } from 'expo-av';
+import * as Haptics from 'expo-haptics';
 
 interface Params {
   id: string;
@@ -30,6 +34,7 @@ export function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [quiz, setQuiz] = useState<QuizProps>({} as QuizProps);
   const [alternativeSelected, setAlternativeSelected] = useState<null | number>(null);
+  const [statusReply, setStatusReply] = useState(0)
 
   const { navigate } = useNavigation();
 
@@ -39,6 +44,14 @@ export function Quiz() {
   const sharedShake = useSharedValue(0);
   const sharedScrollY = useSharedValue(0);
   const sharedCardPosition = useSharedValue(0);
+
+  async function playSound(isCorrect: boolean) {
+    const file = isCorrect ? require('../../assets/correct.mp3') : require('../../assets/wrong.mp3')
+    const { sound } = await Audio.Sound.createAsync(file, { shouldPlay: true })
+
+    await sound.setPositionAsync(0)
+    await sound.playAsync()
+  }
 
 
   function animatedShake() {
@@ -101,8 +114,14 @@ export function Quiz() {
     }
 
     if (quiz.questions[currentQuestion].correct === alternativeSelected) {
+      await playSound(true)
+      setStatusReply(1)
       setPoints(prevState => prevState + 1);
+
     } else {
+      await playSound(false)
+      await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+      setStatusReply(2)
       animatedShake();
     }
 
@@ -167,7 +186,7 @@ export function Quiz() {
       }
     })
     .onEnd((event) => {
-      if(event.translationX < -200 ){
+      if (event.translationX < -200) {
         runOnJS(handleSkipConfirm)()
       }
       sharedCardPosition.value = withTiming(0)
@@ -178,11 +197,12 @@ export function Quiz() {
     return {
       transform: [
         { translateX: sharedCardPosition.value },
-        {rotateZ: `${rotateZ}deg`}
+        { rotateZ: `${rotateZ}deg` }
 
       ]
     }
   })
+
 
   useEffect(() => {
     const quizSelected = QUIZ.filter(item => item.id === id)[0];
@@ -196,13 +216,19 @@ export function Quiz() {
     }
   }, [points]);
 
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener("hardwareBackPress", handleStop)
+    console.log("passei aqui")
+    return () =>  backHandler.remove()
+  }, [])
+
   if (isLoading) {
     return <Loading />
   }
 
   return (
     <View style={styles.container}>
-
+      <OverlayFeedback status={statusReply} />
       <Animated.View style={fixedProgressBarStyles}>
         <Text style={styles.title}>
           {quiz.title}
@@ -227,7 +253,7 @@ export function Quiz() {
             totalOfQuestions={quiz.questions.length}
           />
         </Animated.View>
-        
+
         <GestureDetector gesture={onPain}>
           <Animated.View style={[shakeStyleAnimated, dragStyles]}>
             <Question

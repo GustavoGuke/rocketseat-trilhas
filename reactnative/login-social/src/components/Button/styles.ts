@@ -14,7 +14,6 @@ export const Title = styled.Text`
   color : ${theme.COLORS.WHITE};
   font-size: ${theme.FONT_SIZE.MD}px;
   font-family: ${theme.FONT_FAMILY.BOLD};
-  text-align: center;
 `;
 
 export const LoadIndicator = styled.ActivityIndicator
