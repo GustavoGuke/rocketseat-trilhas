@@ -20,7 +20,7 @@
     "@tamagui/lucide-icons": "^1.94.1",
     "@tamagui/theme": "^1.93.3",
     "babel-plugin-module-resolver": "^5.0.0",
-    "expo": "~50.0.14",
+    "expo": "^51.0.14",
     "expo-file-system": "~16.0.8",
     "expo-font": "~11.10.3",
     "expo-image-picker": "~14.7.1",
