@@ -6,8 +6,9 @@ import { Signin } from './src/screens/Signin';
 import theme from './src/theme';
 import { Loading } from './src/components/Loading';
 
+import { AppProvider, UserProvider } from '@realm/react';
 
-import {} from '@env'
+import { REALM_APP_ID } from '@env'
 export default function App() {
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
@@ -18,13 +19,18 @@ export default function App() {
     return <Loading />
   }
   return (
-    <ThemeProvider theme={theme}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent />
-      <Signin />
-    </ThemeProvider>
+    <AppProvider id={REALM_APP_ID}>
+      <ThemeProvider theme={theme}>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="transparent"
+          translucent />
+        <UserProvider fallback={Signin}>
+          <Loading />
+        </UserProvider>
+       
+      </ThemeProvider>
+    </AppProvider>
   );
 }
 
