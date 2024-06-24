@@ -3,24 +3,30 @@ import { Container, Content, ImageContainer, Title, TitleHeading } from "./style
 
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
+import { TextLinearGradient } from "@components/TextLinearGradient";
 
-
+import { View, ScrollView } from 'react-native'
 
 const backgroundImg = { uri: '../../assets/img/logo-teste.png' }
 
 export function Signin() {
     return (
-        <Container>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
 
-            <ImageContainer resizeMode="contain" source={require('../../assets/img/logo-teste.png')} />
+            <Container>
                 <Content>
-                    <Title>Acesse sua Conta</Title>
+                    <TextLinearGradient />
+                    <ImageContainer resizeMode="contain" source={require('../../assets/img/logo-teste.png')} />
+                </Content>
+                <Content>
+
+                    <TitleHeading>acessar conta</TitleHeading>
                     <Input placeholder="E-mail" keyboardType="email-address" />
                     <Input placeholder="Senha" secureTextEntry />
                     <Button title="ACESSAR" />
-                    <TitleHeading>Ainda não tem acesso?</TitleHeading>
-                    <Button title="CRIAR CONTA" type="SECONDARY"/>
+                    <Button title="CRIAR CONTA" type="SECONDARY" />
                 </Content>
-        </Container>
+            </Container>
+        </ScrollView>
     )
 }
