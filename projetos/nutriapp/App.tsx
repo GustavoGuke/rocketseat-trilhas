@@ -8,6 +8,8 @@ import theme from '@theme/index'
 
 import { Loading } from '@components/Loading';
 import { Signin } from '@screens/Signin';
+import { SignUp } from '@screens/SignUp';
+import { Routes } from '@routes/index.routes';
 
 export default function App() {
   const [fontLoader] = useFonts({ Roboto_400Regular, Roboto_700Bold })
@@ -16,7 +18,7 @@ export default function App() {
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
       {
         fontLoader ?
-          <Signin /> :
+          <Routes /> :
           <Loading />
       }
     </ThemeProvider >
