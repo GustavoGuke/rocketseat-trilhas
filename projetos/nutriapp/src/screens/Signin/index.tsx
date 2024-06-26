@@ -3,6 +3,7 @@ import { Container, Content, ImageContainer, Title, TitleHeading } from "./style
 
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
+import { TextLogo } from "@components/TextLogo";
 
 
 
@@ -13,6 +14,7 @@ export function Signin() {
         <Container>
 
             <ImageContainer resizeMode="contain" source={require('../../assets/img/logo-teste.png')} />
+                <TextLogo title="RealceNutri"/>
                 <Content>
                     <Title>Acesse sua Conta</Title>
                     <Input placeholder="E-mail" keyboardType="email-address" />
