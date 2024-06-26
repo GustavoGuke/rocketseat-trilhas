@@ -9,6 +9,7 @@ import { Home } from "@screens/Home";
 import { Exercise } from "@screens/Exercise";
 import { History } from "@screens/History";
 import { Profile } from "@screens/Profile";
+
 import { useTheme } from "tamagui";
 import { Platform } from "react-native";
 

@@ -21,7 +21,7 @@ export const ImageContainer = styled.ImageBackground`
 
 export const Title = styled.Text`
     color: ${({ theme }) => theme.COLORS.GRAY_100};
-    font-size: ${(props) => props.theme.FONT_SIZE.MD}px;
+    font-size: ${(props) => props.theme.FONT_SIZE.LG}px;
     font-family:${(props) => props.theme.FONT_FAMILY.BOLD};
 `
 
