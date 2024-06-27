@@ -25,12 +25,12 @@ export function AppRoutes() {
         <Tabs.Navigator screenOptions={{
             headerShown: false,
             tabBarShowLabel: false,
-            tabBarActiveTintColor: '#084d38', //greenclaro
+            tabBarActiveTintColor: '#B4F1C4', //greenclaro
             tabBarInactiveTintColor: '#efeff7', //gray200
             tabBarStyle: {
-                backgroundColor: '#f09a54', // gray500
+                backgroundColor: COLORS.ORANGE_500, // gray500
                 borderTopWidth: 0,
-                height: 80,
+                height: 60,
             },
         }}>
             <Tabs.Screen
