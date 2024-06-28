@@ -1,22 +1,41 @@
-import { TouchableOpacity, TouchableOpacityProps, Text, ImageBackground } from "react-native";
+import { TouchableOpacity, TouchableOpacityProps, ImageSourcePropType} from "react-native";
 import { Contente, Image, TitleServices, Ystack } from "./style";
 import { MaterialIcons } from "@expo/vector-icons"
 
 
 type Props = TouchableOpacityProps & {
     title: string,
-    imgBackground: string,
+    imgBackground?: ImageSourcePropType,
 
 }
-export function CardServices({ ...rest }: Props) {
+export function CardServices({ title, imgBackground, ...rest }: Props) {
     return (
-        <TouchableOpacity {...rest} style={{marginBottom:5}}>
+        <TouchableOpacity {...rest} style={{ marginBottom: 5 }}>
             <Contente>
-                <Image
-                    borderRadius={20}
-                    resizeMode="cover"
-                    source={require('../../assets/img/bg-diario-alimentar.png')}
-                >
+                {imgBackground ?
+                    <Image
+                        borderRadius={20}
+                        resizeMode="cover"
+                        source={imgBackground}
+                        
+                    >
+                        <Ystack>
+                            {/* <MaterialIcons
+                        name='restaurant'
+                        size={55}
+                        color={"white"}
+                        
+                        /> */}
+                            <TitleServices >{title}</TitleServices>
+                            <MaterialIcons
+                                name='chevron-right'
+                                size={55}
+                                color={"orange"}
+
+                            />
+                        </Ystack>
+                    </Image> :
+
                     <Ystack>
                         {/* <MaterialIcons
                         name='restaurant'
@@ -24,7 +43,7 @@ export function CardServices({ ...rest }: Props) {
                         color={"white"}
                         
                         /> */}
-                        <TitleServices >Diario alimentar</TitleServices>
+                        <TitleServices >{title}</TitleServices>
                         <MaterialIcons
                             name='chevron-right'
                             size={55}
@@ -32,7 +51,7 @@ export function CardServices({ ...rest }: Props) {
 
                         />
                     </Ystack>
-                </Image>
+                }
             </Contente>
         </TouchableOpacity>
     )

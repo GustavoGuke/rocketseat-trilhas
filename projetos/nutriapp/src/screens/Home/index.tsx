@@ -5,6 +5,7 @@ import { Title } from "@components/Title";
 import { useTheme } from "styled-components/native";
 import { CardServices } from "@components/CardServices";
 
+import backgroundImg  from "../../assets/img/bg-diario-alimentar.png"
 
 export function Home(){
     const {COLORS} = useTheme()
@@ -13,8 +14,8 @@ export function Home(){
            <Header />
            <Content>
             <Title text="Serviços" color={COLORS.ORANGE_500} size={24}/>
-            <CardServices />
-            <CardServices />
+            <CardServices title="Diário Alimentar" imgBackground={backgroundImg}/>
+            
            </Content>
         </Container>
     )

@@ -15,11 +15,11 @@ export  const AvatarContainer = styled.View<Props>`
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.COLORS.GRAY_600};
+  background-color: ${(props) => props.theme.COLORS.GRAY_100};
 `;
 
 // Imagem que será exibida dentro do Avatar
-export const AvatarImage = styled.Image`
+export const AvatarImage = styled.ImageBackground`
   width: 100%;
   height: 100%;
 `;

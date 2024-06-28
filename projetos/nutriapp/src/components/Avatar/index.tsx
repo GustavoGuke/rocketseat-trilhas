@@ -1,9 +1,9 @@
 import { AvatarContainer, AvatarImage, AvatarText } from "./style";
-
+import {ImageSourcePropType} from 'react-native'
 
 type AvatarPros = {
   size?: number,
-  imageUri?:string,
+  imageUri?:ImageSourcePropType
   initials?: string 
 
 }
@@ -12,7 +12,7 @@ const Avatar = ({ size, imageUri, initials }: AvatarPros) => {
     return (
       <AvatarContainer size={size} >
         {imageUri ? (
-          <AvatarImage source={{ uri: imageUri }} />
+          <AvatarImage source={imageUri} />
         ) : (
           <AvatarText size={size}>{initials}</AvatarText>
         )}

@@ -1,6 +1,8 @@
 import Avatar from "@components/Avatar";
 import { Container, ContainerTitle, Title } from "./style";
 
+import backgroundImage from '../../assets/img/prato-comidaIA.png';
+
 export function Header(){
     return (
         <Container>
@@ -8,7 +10,7 @@ export function Header(){
                 <Title>Relace</Title>
                 <Title>Nutri</Title>
             </ContainerTitle>
-            <Avatar size={50} initials="RN"/>
+            <Avatar size={50}  imageUri={backgroundImage}/>
         </Container>
     )
 }
