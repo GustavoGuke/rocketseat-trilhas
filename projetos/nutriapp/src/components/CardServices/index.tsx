@@ -3,12 +3,17 @@ import { Contente, Image, TitleServices, Ystack } from "./style";
 import { MaterialIcons } from "@expo/vector-icons"
 
 
-type Props = TouchableOpacityProps & {}
+type Props = TouchableOpacityProps & {
+    title: string,
+    imgBackground: string,
+
+}
 export function CardServices({ ...rest }: Props) {
     return (
         <TouchableOpacity {...rest} style={{marginBottom:5}}>
             <Contente>
                 <Image
+                    borderRadius={20}
                     resizeMode="cover"
                     source={require('../../assets/img/bg-diario-alimentar.png')}
                 >
@@ -19,7 +24,7 @@ export function CardServices({ ...rest }: Props) {
                         color={"white"}
                         
                         /> */}
-                        <TitleServices>Diario alimentar</TitleServices>
+                        <TitleServices >Diario alimentar</TitleServices>
                         <MaterialIcons
                             name='chevron-right'
                             size={55}

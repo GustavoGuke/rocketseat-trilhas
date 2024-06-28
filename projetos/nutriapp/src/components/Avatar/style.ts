@@ -1,8 +1,14 @@
 
 import styled from 'styled-components/native';
 
+
+type Props = {
+  size?: number,
+
+}
+
 // Container que pode ser um View com bordas redondas
-export  const AvatarContainer = styled.View`
+export  const AvatarContainer = styled.View<Props>`
   width: ${(props) => props.size || 50}px;
   height: ${(props) => props.size || 50}px;
   border-radius: ${(props) => (props.size || 50) / 2}px;
@@ -19,7 +25,7 @@ export const AvatarImage = styled.Image`
 `;
 
 // Texto usado como fallback quando não há imagem
-export const AvatarText = styled.Text`
+export const AvatarText = styled.Text<Props>`
   color: #fff;
   font-size: ${(props) => (props.size  || 50) / 2.5}px;
   font-weight: bold;

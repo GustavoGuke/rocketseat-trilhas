@@ -4,8 +4,8 @@ export const Contente = styled.View`
     width:100%;
     flex-direction:row;
    
-    border-radius: 26px;
-    background-color:${(props) => props.theme.COLORS.ORANGE_400};
+    border-radius: 20px;
+    background-color:${(props) => props.theme.COLORS.ORANGE_200};
     height:100px;
     /* align-items:center;
     justify-content:space-between; */
@@ -18,12 +18,14 @@ export const Image = styled.ImageBackground`
   width: 100%;
   height: 100%;
   border-radius:50px;
-  
+  padding:2px;
 `;
 
 export const TitleServices = styled.Text`
-    color: ${({ theme,}) => theme.COLORS.RED_DARK};
+    text-shadow:1px 1px 2px black;;
+    color: ${({ theme,}) => theme.COLORS.WHITE};
     font-size: ${({ theme, }) => theme.FONT_SIZE.LG}px;
     font-family:${(props) => props.theme.FONT_FAMILY.BOLD};
+    padding:5px;
     
 `
