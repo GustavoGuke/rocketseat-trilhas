@@ -14,6 +14,7 @@ export function Home(){
            <Content>
             <Title text="Serviços" color={COLORS.ORANGE_500} size={24}/>
             <CardServices />
+            <CardServices />
            </Content>
         </Container>
     )

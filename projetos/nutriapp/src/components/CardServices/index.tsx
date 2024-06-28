@@ -6,28 +6,28 @@ import { MaterialIcons } from "@expo/vector-icons"
 type Props = TouchableOpacityProps & {}
 export function CardServices({ ...rest }: Props) {
     return (
-        <TouchableOpacity {...rest}>
+        <TouchableOpacity {...rest} style={{marginBottom:5}}>
             <Contente>
-                <Ystack>
-                    <TitleServices>Diario alimentar</TitleServices>
-                    <MaterialIcons
+                <Image
+                    resizeMode="cover"
+                    source={require('../../assets/img/bg-diario-alimentar.png')}
+                >
+                    <Ystack>
+                        {/* <MaterialIcons
                         name='restaurant'
                         size={55}
-                        color={"orange"}
+                        color={"white"}
+                        
+                        /> */}
+                        <TitleServices>Diario alimentar</TitleServices>
+                        <MaterialIcons
+                            name='chevron-right'
+                            size={55}
+                            color={"orange"}
 
-                    />
-                </Ystack>
-               
-                <MaterialIcons
-                    name='chevron-right'
-                    size={55}
-                    color={"orange"}
-
-                />
-                {/* <Image
-                    resizeMode="cover"
-                    source={require('../../assets/img/prato-comidaIA-removebg-sem-pano.png')}
-                /> */}
+                        />
+                    </Ystack>
+                </Image>
             </Contente>
         </TouchableOpacity>
     )
