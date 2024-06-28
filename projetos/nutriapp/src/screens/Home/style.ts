@@ -12,5 +12,6 @@ export const Content = styled.View`
     border-top-left-radius:50px;
     border-top-right-radius:50px;
     flex:1;
+    padding: 20px;
     background-color: ${({ theme }) => theme.COLORS.GREEN_100};
 `
