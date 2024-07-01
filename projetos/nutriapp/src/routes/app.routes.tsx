@@ -2,15 +2,16 @@ import { createBottomTabNavigator, BottomTabNavigationProp } from "@react-naviga
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import { FontAwesome6 } from '@expo/vector-icons';
 
+import { useTheme } from "styled-components/native";
 
 import { Home } from "@screens/Home";
 import { Profile } from "@screens/Profile";
-import { useTheme } from "styled-components/native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { FoodDiary } from "@screens/Services/FoodDiary/HomeFoodDiary";
 
 type AppRoutes = {
     Home: undefined;
     Profile: undefined;
+    FoodDiary: undefined;
 }
 
 
@@ -45,6 +46,11 @@ export function AppRoutes() {
                 name="Profile"
                 component={Profile}
                 options={{ tabBarIcon: ({color, size }) => <MaterialIcons name="person" size={iconSize} color={color} /> }} />
+            <Tabs.Screen
+                name="FoodDiary"
+                component={FoodDiary} 
+                options={ { tabBarButton: () => null } }
+                />
         </Tabs.Navigator>
     )
 }
