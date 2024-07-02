@@ -5,13 +5,12 @@ export const Container = styled.TouchableOpacity`
     margin: 2px 0;
     background-color:${(props) => props.theme.COLORS.ESMERALDA_300};
     padding:24px;
-    border-radius:6px;
+    border-radius:8px;
     flex-direction:row;
 `
 
 export const Title = styled.Text`
     text-align: center;
-
     font-size: ${(props) => props.theme.FONT_SIZE.XX}px;
     font-family: ${(props) => props.theme.FONT_FAMILY.BOLD};
     color: ${(props) => props.theme.COLORS.GRAY_700};
