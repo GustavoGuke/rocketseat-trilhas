@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const Container = styled.TouchableOpacity`
     width: 100%;
-    margin: 2px 0;
+    margin: 10px 0;
     background-color:${(props) => props.theme.COLORS.ESMERALDA_300};
     padding:24px;
     border-radius:8px;

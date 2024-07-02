@@ -1,6 +1,7 @@
 import { Header } from "@components/Header";
 import { Container, Content, Text } from "./styles";
 import { CardPercent } from "@components/CardPercent";
+import { ButtonIcon } from "@components/ButtonIcon";
 
 export function FoodDiary() {
     return (
@@ -8,7 +9,12 @@ export function FoodDiary() {
             <Header />
             <Content>
                 <CardPercent title="90%" subtitle="das refeições dentro da dieta" />
-                <Text align="flex-end" size={40}>Refeições</Text>
+                <Text align="flex-end" weight="bold" size={40}>Refeições</Text>
+                <ButtonIcon
+                    weight="bold"
+                    size={40}
+                    icon="arrow-forward" 
+                    title="Nova refeição" />
             </Content>
         </Container>
     )

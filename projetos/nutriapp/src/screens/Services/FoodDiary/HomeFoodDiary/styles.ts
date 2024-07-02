@@ -22,6 +22,7 @@ export const Content = styled.View`
 export const Text = styled.Text<Props>`
   color: ${({ theme }) => theme.COLORS.GRAY_700};
   font-size: ${(props) => (props.size || 50) / 2.5}px;
-  font-weight: ${(props) => (props.align || props.theme.FONT_FAMILY.REGULAR) };
+  font-weight: ${(props) => (props.weight || props.theme.FONT_FAMILY.REGULAR) };
   text-align: ${(props) => (props.align || "center") };
+  margin-top:20px;
 `;
