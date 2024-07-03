@@ -8,24 +8,25 @@ type Props = TouchableOpacityProps & {
     //icon: string
     type?: ButtonTypeStyleProps
     title?:string
-
+    hour?:string
     size?: number,
     align?: string
     weight?: string
     bgColor?: string
 }
 
-export function ButtonIcon({ icon, type = 'PRIMARY', title, bgColor, weight, size, ...rest }: Props) {
+export function ButtonIcon({ icon, type = 'PRIMARY',hour, title, bgColor, weight, size, ...rest }: Props) {
     const {COLORS}= useTheme()
     return (
         <Container bgColor={bgColor} {...rest}>
+
+            <Text weight={weight} size={size}>{hour} | {title}</Text>
             <MaterialIcons
-                color={type === 'PRIMARY' ? COLORS.GREEN_700 : COLORS.RED_DARK}
+                color={type === 'PRIMARY' ? COLORS.GREEN_600 : COLORS.RED_MID}
                 name={icon}
                 type={type} 
                 size={24}
                 />
-                <Text weight={weight} size={size}>{title}</Text>
                 
         </Container>
     )

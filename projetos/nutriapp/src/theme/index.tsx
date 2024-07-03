@@ -22,6 +22,8 @@ export default {
 
         RED: '#F75A68',
         RED_DARK: '#AA2834',
+        RED_MID: '#F3BABD',
+        RED_LIGHT: '#F4E6E7',
 
         GRAY_700: '#121214',
         GRAY_600: '#202024',
@@ -30,6 +32,8 @@ export default {
         GRAY_300: '#7C7C8A',
         GRAY_200: '#C4C4CC',
         GRAY_100: '#E1E1E6',
+        GRAY_99: '#FAFAFA',
+        GRAY_98: '#EFF0F0',
 
         ORANGE_700: '#c2410c',
         ORANGE_600: '#ea580c',

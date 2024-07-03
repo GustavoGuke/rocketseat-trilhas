@@ -15,7 +15,7 @@ type PropsText = {
     weight?: string
 }
 
-type PropsButton = {
+type PropsButton = PropsText & {
     bgColor?: string
 }
 
@@ -23,10 +23,12 @@ export const Container = styled(TouchableOpacity)<PropsButton>`
     width: 100%;
     height: 56px;
     flex-direction:row;
-    justify-content: center;
-    align-items: center;
+    justify-content: ${(props) => (props.align || "center") };
+    align-items:center;
     border-radius:6px;
-    
+    gap:2px;
+    margin-bottom:10px;
+    padding:14px;
     background-color:${({ theme, bgColor }) => (bgColor || theme.COLORS.ORANGE_300)};
 `
 
@@ -39,5 +41,5 @@ export const Text = styled.Text<PropsText>`
 
 export const Icon = styled(MaterialIcons).attrs<Props>(({ theme, type }: any) => ({
     size: 32,
-    color: type === 'PRIMARY' ? theme.COLORS.GREEN_700 : theme.COLORS.RED_DARK
+    color: type === 'PRIMARY' ? theme.COLORS.GREEN_200 : theme.COLORS.RED_MID
 }))
