@@ -5,6 +5,8 @@ import { ButtonIcon } from "@components/ButtonIcon";
 import { SectionList, TouchableOpacity, View } from "react-native";
 import { useState } from "react";
 import { useTheme } from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigatorRoutesProps } from "@routes/app.routes";
 
 
 
@@ -65,12 +67,26 @@ const history = [
 
 export function FoodDiary() {
     const { COLORS } = useTheme()
+    const navigation = useNavigation<AppNavigatorRoutesProps>()
     const [meal, setMeal] = useState(history)
+
+    function handleFoodMeals() {
+        navigation.navigate("FoodMeals")
+    }
+
     return (
         <Container>
             <Header />
             <Content>
-                <CardPercent title="90%" subtitle="das refeições dentro da dieta" />
+                <CardPercent
+                    icon="arrow-outward"
+                    title="90%"
+                    subtitle="das refeições dentro da dieta"
+                    size={24}
+                    
+                    onPress={handleFoodMeals}
+
+                />
                 <Text align="flex-end" weight="bold" size={40}>Refeições</Text>
                 <ButtonIcon
                     weight="bold"
@@ -78,7 +94,7 @@ export function FoodDiary() {
                     icon="arrow-forward"
                     title="Nova refeição"
                     bgColor={COLORS.ORANGE_200}
-                    />
+                />
 
                 <SectionList
                     sections={meal}

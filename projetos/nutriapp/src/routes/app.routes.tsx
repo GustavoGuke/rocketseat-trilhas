@@ -7,11 +7,13 @@ import { useTheme } from "styled-components/native";
 import { Home } from "@screens/Home";
 import { Profile } from "@screens/Profile";
 import { FoodDiary } from "@screens/Services/FoodDiary/HomeFoodDiary";
+import { FoodMeals } from "@screens/Services/FoodDiary/FoodMeals";
 
 type AppRoutes = {
     Home: undefined;
     Profile: undefined;
     FoodDiary: undefined;
+    FoodMeals:undefined;
 }
 
 
@@ -50,7 +52,12 @@ export function AppRoutes() {
                 name="FoodDiary"
                 component={FoodDiary} 
                 options={ { tabBarButton: () => null } }
-                />
+            />
+            <Tabs.Screen
+                name="FoodMeals"
+                component={FoodMeals}
+                options={{ tabBarButton: () => null }}
+            />
         </Tabs.Navigator>
     )
 }

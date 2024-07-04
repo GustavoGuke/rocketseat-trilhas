@@ -4,13 +4,13 @@ import styled from "styled-components/native";
 export type ButtonTypeStyleProps = 'PRIMARY' | 'SECONDARY';
 
 type Props = {
-    bgColor: ButtonTypeStyleProps
+    bgColor?: ButtonTypeStyleProps
 }
 
 export const Container = styled.TouchableOpacity<Props>`
     width: 100%;
     margin: 10px 0;
-    background-color:${({theme, bgColor}) => bgColor === 'PRIMARY' ? theme.COLORS.ESMERALDA_300 : theme.COLORS.RED_LIGHT};
+    background-color:${({theme, bgColor}) => bgColor === 'PRIMARY' ? theme.COLORS.GREEN_200 : theme.COLORS.RED_LIGHT};
     padding:24px;
     border-radius:8px;
     flex-direction:row;
