@@ -2,12 +2,10 @@ import styled from "styled-components/native";
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = {
-    size?: number,
-    align?: string
-    weight?: string
+    bgColor?:string
 }
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled(SafeAreaView)<Props>`
     flex: 1;
-    background-color: ${({ theme }) => theme.COLORS.GREEN_200};
+    background-color: ${({ theme, bgColor }) => bgColor || theme.COLORS.GREEN_200};
 `
