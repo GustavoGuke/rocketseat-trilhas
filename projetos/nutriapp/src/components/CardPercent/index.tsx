@@ -4,8 +4,8 @@ import { MaterialIcons } from "@expo/vector-icons"
 import { useTheme } from "styled-components/native";
 
 type Props = TouchableOpacityProps & {
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
   icon: keyof typeof MaterialIcons.glyphMap
   size: number
   color?: ButtonTypeStyleProps

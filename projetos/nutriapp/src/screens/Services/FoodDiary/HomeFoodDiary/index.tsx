@@ -94,6 +94,7 @@ export function FoodDiary() {
                     icon="arrow-forward"
                     title="Nova refeição"
                     bgColor={COLORS.ORANGE_200}
+                    onPress={() => navigation.navigate("NewMeal")}
                 />
 
                 <SectionList

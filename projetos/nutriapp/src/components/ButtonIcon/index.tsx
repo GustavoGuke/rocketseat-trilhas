@@ -13,12 +13,13 @@ type Props = TouchableOpacityProps & {
     align?: string
     weight?: string
     bgColor?: string
+    onPress?:() => void
 }
 
-export function ButtonIcon({ icon, type = 'PRIMARY',hour, title, bgColor, weight, size, ...rest }: Props) {
+export function ButtonIcon({ icon, type = 'PRIMARY',hour, title, bgColor, weight, size, onPress, ...rest }: Props) {
     const {COLORS}= useTheme()
     return (
-        <Container bgColor={bgColor} {...rest}>
+        <Container bgColor={bgColor} {...rest} onPress={onPress}>
 
             <Text weight={weight} size={size}>{hour} | {title}</Text>
             <MaterialIcons

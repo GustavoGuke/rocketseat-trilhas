@@ -8,12 +8,14 @@ import { Home } from "@screens/Home";
 import { Profile } from "@screens/Profile";
 import { FoodDiary } from "@screens/Services/FoodDiary/HomeFoodDiary";
 import { FoodMeals } from "@screens/Services/FoodDiary/FoodMeals";
+import { NewMeal } from "@screens/Services/FoodDiary/NewMeal";
 
 type AppRoutes = {
     Home: undefined;
     Profile: undefined;
     FoodDiary: undefined;
     FoodMeals:undefined;
+    NewMeal:undefined;
 }
 
 
@@ -56,6 +58,11 @@ export function AppRoutes() {
             <Tabs.Screen
                 name="FoodMeals"
                 component={FoodMeals}
+                options={{ tabBarButton: () => null }}
+            />
+            <Tabs.Screen
+                name="NewMeal"
+                component={NewMeal}
                 options={{ tabBarButton: () => null }}
             />
         </Tabs.Navigator>
