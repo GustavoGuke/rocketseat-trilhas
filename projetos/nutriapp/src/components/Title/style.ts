@@ -16,3 +16,5 @@ export const Container = styled.Text<PropsTitle>`
     text-align: ${({align}) => align ||"center"};
     padding-top:${({ padding }) => padding || 22}px;
 `
+
+

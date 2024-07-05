@@ -7,6 +7,8 @@ import { useState } from "react";
 import { useTheme } from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
+import { ContenteDefault } from "@components/ContenteDefault";
+import { StatusBar } from "react-native";
 
 
 
@@ -77,7 +79,7 @@ export function FoodDiary() {
     return (
         <Container>
             <Header />
-            <Content>
+            <ContenteDefault>
                 <CardPercent
                     icon="arrow-outward"
                     title="90%"
@@ -119,7 +121,7 @@ export function FoodDiary() {
                         </TouchableOpacity>
                     )}
                 />
-            </Content>
+            </ContenteDefault>
         </Container>
     )
 }

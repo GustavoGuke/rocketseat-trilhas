@@ -1,9 +1,6 @@
 import { createBottomTabNavigator, BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
-import { FontAwesome6 } from '@expo/vector-icons';
-
 import { useTheme } from "styled-components/native";
-
 import { Home } from "@screens/Home";
 import { Profile } from "@screens/Profile";
 import { FoodDiary } from "@screens/Services/FoodDiary/HomeFoodDiary";
@@ -18,10 +15,8 @@ type AppRoutes = {
     NewMeal:undefined;
 }
 
-
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;
 const Tabs = createBottomTabNavigator<AppRoutes>();
-
 
 export function AppRoutes() {
     const { COLORS } = useTheme()

@@ -1,5 +1,3 @@
-import { CardPercent } from "@components/CardPercent";
-import { ScreenDefault } from "@components/ScreenDefault";
 import { ContenteDefault } from "@components/ContenteDefault";
 import { Title } from "@components/Title";
 import { useNavigation } from "@react-navigation/native";
@@ -7,16 +5,16 @@ import { AppNavigatorRoutesProps } from "@routes/app.routes";
 import HighLight from "@components/Higthlight";
 import { useTheme } from "styled-components/native";
 import { Container, ContainerSafe } from "./styles";
-import { StatusBar } from "react-native";
+
+import { HeaderIcon } from "@components/HeaderIcon";
 
 export function FoodMeals() {
     const { COLORS } = useTheme()
     const navigation = useNavigation<AppNavigatorRoutesProps>()
     return (
-        <ContainerSafe bgColor={COLORS.RED_LIGHT}>
-            <StatusBar barStyle="dark-content" backgroundColor={COLORS.RED_LIGHT} translucent />
-            <CardPercent
-                bgColor="SECONDARY"
+        <ContainerSafe bgColor={COLORS.RED_LIGHT}>        
+            <HeaderIcon
+                sizeText={40}
                 color="SECONDARY"
                 size={40}
                 icon="arrow-back"

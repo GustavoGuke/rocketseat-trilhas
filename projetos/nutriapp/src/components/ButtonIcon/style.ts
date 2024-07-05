@@ -39,7 +39,3 @@ export const Text = styled.Text<PropsText>`
   text-align: ${(props) => (props.align || "center") };
 `;
 
-export const Icon = styled(MaterialIcons).attrs<Props>(({ theme, type }: any) => ({
-    size: 32,
-    color: type === 'PRIMARY' ? theme.COLORS.GREEN_200 : theme.COLORS.RED_MID
-}))

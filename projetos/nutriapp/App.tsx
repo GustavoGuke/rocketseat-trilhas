@@ -12,10 +12,11 @@ import { SignUp } from '@screens/SignUp';
 import { Routes } from '@routes/index.routes';
 
 export default function App() {
+  
   const [fontLoader] = useFonts({ Roboto_400Regular, Roboto_700Bold })
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar barStyle="dark-content" backgroundColor="#bbf7d0" translucent />
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
       {
         fontLoader ?
           <Routes /> :
