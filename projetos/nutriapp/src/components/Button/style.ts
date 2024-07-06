@@ -12,10 +12,9 @@ export const Container = styled(TouchableOpacity) <Props>`
     flex: 1;
     min-height: 46px;
     max-height: 46px;
-
+    padding: 8px;
     background-color: ${({ theme, bgColor }: any) => bgColor || "transparent"};
     border-radius: 6px;
-    border-width:  ${({ type }: any) => type === 'SECONDARY' ? "1px" : "0"};
     border-color:${theme.COLORS.GREEN_700};;
     margin-top:${({margin}) => (margin || 20)}px;
     justify-content: center;

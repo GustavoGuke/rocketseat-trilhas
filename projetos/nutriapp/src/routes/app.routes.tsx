@@ -6,6 +6,7 @@ import { Profile } from "@screens/Profile";
 import { FoodDiary } from "@screens/Services/FoodDiary/HomeFoodDiary";
 import { FoodMeals } from "@screens/Services/FoodDiary/FoodMeals";
 import { NewMeal } from "@screens/Services/FoodDiary/NewMeal";
+import { FeedbackMeal } from "@screens/Services/FoodDiary/FeedbackMeal";
 
 type AppRoutes = {
     Home: undefined;
@@ -13,6 +14,7 @@ type AppRoutes = {
     FoodDiary: undefined;
     FoodMeals:undefined;
     NewMeal:undefined;
+    feedbackMeal:undefined
 }
 
 export type AppNavigatorRoutesProps = BottomTabNavigationProp<AppRoutes>;
@@ -58,6 +60,11 @@ export function AppRoutes() {
             <Tabs.Screen
                 name="NewMeal"
                 component={NewMeal}
+                options={{ tabBarButton: () => null }}
+            />
+            <Tabs.Screen
+                name="feedbackMeal"
+                component={FeedbackMeal}
                 options={{ tabBarButton: () => null }}
             />
         </Tabs.Navigator>

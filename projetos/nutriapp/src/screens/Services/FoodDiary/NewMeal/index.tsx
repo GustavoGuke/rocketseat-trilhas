@@ -96,7 +96,12 @@ export function NewMeal() {
                         <Text>Não</Text>
                     </ButtonMeal>
                 </Xstack>
-                <Button title="Cadastrar Refeição" bgColor={COLORS.GREEN_700} margin={50}/>
+                <Button
+                    onPress={() => navigation.navigate("feedbackMeal")}
+                    title="Cadastrar Refeição"
+                    bgColor={COLORS.GREEN_700}
+                    margin={50}
+                />
             </ContenteDefault>
         </ScreenDefault>
     )
