@@ -112,7 +112,7 @@ export function FoodDiary() {
                             align="space-between"
                             bgColor={COLORS.GRAY_98}
                             weight="REGULAR"
-
+                            onPress={() => navigation.navigate("MealDetails")}
                         />
                     )}
                     renderSectionHeader={({ section }) => (

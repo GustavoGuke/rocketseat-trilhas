@@ -15,13 +15,16 @@ type PropsButton = PropsText & {
 
 export const Xstack = styled.View<Props>`
     width:100%;
+    margin-bottom:50px;
     flex-direction:row;
+    align-items: center;
     gap:2px;
+    padding:16px;
     background-color: ${({ theme, bgColor }) => bgColor || theme.COLORS.WHITE};
 `
 
 export const ButtonMeal = styled.TouchableOpacity<PropsButton>`
-    flex:1;
+    width: 100%;
     height: 56px;
     flex-direction: row;
     justify-content: center;
@@ -30,12 +33,12 @@ export const ButtonMeal = styled.TouchableOpacity<PropsButton>`
     gap:5px;
     margin-bottom:10px;
     padding:8px ;
-    background-color:${({ theme, bgColor }) => (bgColor || theme.COLORS.ORANGE_100)};
+    background-color:${({ theme, bgColor }) => (bgColor || theme.COLORS.GREEN_300)};
 `
 
 export const Text = styled.Text<PropsText>`
   color: ${({ theme }) => theme.COLORS.GRAY_700};
   font-size: ${(props) => (props.size || 40) / 2.5}px;
-  font-weight: ${(props) => (props.weight || props.theme.FONT_FAMILY.REGULAR) };
-  text-align: ${(props) => (props.align || "center") };
+  font-weight: ${(props) => (props.weight || props.theme.FONT_FAMILY.REGULAR)};
+  text-align: ${(props) => (props.align || "center")};
 `;

@@ -4,13 +4,14 @@ type Props = {
     title: string;
     subtitle: string;
     bgColor?:string
+    align?:string
 }
 
-const HighLight = ({title, subtitle, bgColor}: Props) => {
+const HighLight = ({title, subtitle, bgColor, align}: Props) => {
   return (
     <Container bgColor={bgColor}>
-        <Title>{title}</Title>
-        <Subtitle>{subtitle}</Subtitle>
+      <Title align={align}>{title}</Title>
+      <Subtitle align={align}>{subtitle}</Subtitle>
     </Container>
   )
 }

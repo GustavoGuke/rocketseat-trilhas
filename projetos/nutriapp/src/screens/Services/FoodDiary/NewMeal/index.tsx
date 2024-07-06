@@ -1,17 +1,17 @@
+import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from "styled-components/native"
-import { ScreenDefault } from "@components/ScreenDefault"
+
 import { useNavigation } from "@react-navigation/native"
 import { AppNavigatorRoutesProps } from "@routes/app.routes"
+
+import { ScreenDefault } from "@components/ScreenDefault"
 import { ContenteDefault } from "@components/ContenteDefault"
 import { HeaderIcon } from "@components/HeaderIcon"
 import { Title } from "@components/Title"
 import { Input } from "@components/Input"
-import { Xstack, ButtonMeal, Text, Icon } from "./style"
-import { TouchableOpacityProps } from "react-native";
-import { MaterialIcons } from '@expo/vector-icons';
-import { useState } from "react"
 import { Button } from "@components/Button"
 
+import { Xstack, ButtonMeal, Text} from "./style"
 
 
 
@@ -97,7 +97,7 @@ export function NewMeal() {
                     </ButtonMeal>
                 </Xstack>
                 <Button
-                    onPress={() => navigation.navigate("feedbackMeal")}
+                    onPress={() => navigation.navigate("FeedbackMeal")}
                     title="Cadastrar Refeição"
                     bgColor={COLORS.GREEN_700}
                     margin={50}
