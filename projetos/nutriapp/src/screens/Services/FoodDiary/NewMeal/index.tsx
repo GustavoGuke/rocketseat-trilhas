@@ -6,17 +6,22 @@ import { ContenteDefault } from "@components/ContenteDefault"
 import { HeaderIcon } from "@components/HeaderIcon"
 import { Title } from "@components/Title"
 import { Input } from "@components/Input"
-import { Xstack, Button, Text, Icon } from "./style"
-import {  TouchableOpacityProps } from "react-native";
+import { Xstack, ButtonMeal, Text, Icon } from "./style"
+import { TouchableOpacityProps } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
+import { useState } from "react"
+import { Button } from "@components/Button"
 
 
 
 
 export function NewMeal() {
+
     const { FONT_SIZE } = useTheme()
     const { COLORS } = useTheme()
     const navigation = useNavigation<AppNavigatorRoutesProps>()
+
+
     return (
         <ScreenDefault bgColor={COLORS.GREEN_200}>
 
@@ -79,16 +84,19 @@ export function NewMeal() {
                     size={FONT_SIZE.SM}
                 />
                 <Xstack>
-                    <Button bgColor={COLORS.GREEN_100}>
-                        <MaterialIcons name="circle" size={16} color={COLORS.GREEN_700}/>
+                    <ButtonMeal
+                        bgColor={COLORS.GREEN_100}>
+                        <MaterialIcons name="circle" size={16} color={COLORS.GREEN_700} />
                         <Text>Sim</Text>
-                    </Button>
+                    </ButtonMeal>
 
-                    <Button bgColor={COLORS.RED_MID}>
-                    <MaterialIcons name="circle" size={16} color={COLORS.RED_DARK}/>
+                    <ButtonMeal
+                        bgColor={COLORS.RED_MID}>
+                        <MaterialIcons name="circle" size={16} color={COLORS.RED_DARK} />
                         <Text>Não</Text>
-                    </Button>
+                    </ButtonMeal>
                 </Xstack>
+                <Button title="Cadastrar Refeição" bgColor={COLORS.GREEN_700} margin={50}/>
             </ContenteDefault>
         </ScreenDefault>
     )

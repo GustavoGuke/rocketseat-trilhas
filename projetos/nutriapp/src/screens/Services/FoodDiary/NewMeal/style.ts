@@ -30,7 +30,7 @@ export const Xstack = styled.View<Props>`
     background-color: ${({ theme, bgColor }) => bgColor || theme.COLORS.WHITE};
 `
 
-export const Button = styled(TouchableOpacity)<PropsButton>`
+export const ButtonMeal = styled.TouchableOpacity<PropsButton>`
     flex:1;
     height: 56px;
     flex-direction: row;
@@ -39,13 +39,16 @@ export const Button = styled(TouchableOpacity)<PropsButton>`
     border-radius:6px;
     gap:5px;
     margin-bottom:10px;
-    padding:14px;
+    padding:8px ;
+    
     background-color:${({ theme, bgColor }) => (bgColor || theme.COLORS.ORANGE_100)};
+
+  
 `
 
 export const Text = styled.Text<PropsText>`
   color: ${({ theme }) => theme.COLORS.GRAY_700};
-  font-size: ${(props) => (props.size || 50) / 2.5}px;
+  font-size: ${(props) => (props.size || 40) / 2.5}px;
   font-weight: ${(props) => (props.weight || props.theme.FONT_FAMILY.REGULAR) };
   text-align: ${(props) => (props.align || "center") };
 `;

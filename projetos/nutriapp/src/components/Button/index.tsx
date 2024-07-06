@@ -1,16 +1,17 @@
 import { TouchableOpacityProps } from "react-native";
-import { Container, Title, ButtonTypeStyleProps, LoadIndicator } from "./style";
+import { Container, Title, LoadIndicator } from "./style";
 
 
 type Props = TouchableOpacityProps & {
     title: string;
-    type?: ButtonTypeStyleProps;
+    bgColor?: string;
     isLoading?:boolean; 
+    margin?:number
 }
 
-export function Button({ title, type = 'PRIMARY', isLoading = false, ...rest }: Props) {
+export function Button({ title, bgColor, margin, isLoading = false, ...rest }: Props) {
     return (
-        <Container type={type} {...rest}>
+        <Container bgColor={bgColor} margin={margin}  {...rest}>
             {isLoading? <LoadIndicator /> : <Title>{title}</Title>}
         </Container>
     )
