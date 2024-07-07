@@ -6,8 +6,8 @@ import { useTheme } from "styled-components/native";
 type Props = TouchableOpacityProps & {
     title?: string;
     subtitle?: string;
-    icon: keyof typeof MaterialIcons.glyphMap
-    size: number
+    icon?: keyof typeof MaterialIcons.glyphMap
+    size?: number
     color?: string
     bgColor?: string
     sizeText?:number
