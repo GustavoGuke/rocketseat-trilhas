@@ -24,9 +24,6 @@
       ],
       "@utils/*": [
         "./src/utils/*"
-      ],
-      "@firebase/*": [
-        "./src/firebase/*"
       ]
     }
   }
