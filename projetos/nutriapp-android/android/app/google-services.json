@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "67373230707",
+    "project_id": "realce-nutri-app-teste",
+    "storage_bucket": "realce-nutri-app-teste.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67373230707:android:edaa782e42bd7292dc1806",
+        "android_client_info": {
+          "package_name": "com.guke.nutriapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "67373230707-c15h7p7dos84q083q1pohq9linslp9iq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.guke.nutriapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "67373230707-oisbhevjc77erjqraird5l7lb4i174km.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc-G60x3pohEBklXUR5EKLqsXGigz8abY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "67373230707-oisbhevjc77erjqraird5l7lb4i174km.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

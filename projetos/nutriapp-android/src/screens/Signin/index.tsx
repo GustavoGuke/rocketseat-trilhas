@@ -9,7 +9,7 @@ import { AuthNavigationRoutesProps } from "@routes/auth.routes";
 
 export function Signin() {
     const navigation = useNavigation<AuthNavigationRoutesProps>()
-    return (
+    return ( 
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
             <Container>
                 <Content>
@@ -20,11 +20,12 @@ export function Signin() {
                     <TitleHeading>acessar conta</TitleHeading>
                     <Input placeholder="E-mail" keyboardType="email-address" />
                     <Input placeholder="Senha" secureTextEntry />
-                    <Button title="ACESSAR" />
+                    <Button title="ACESSAR" bgColor='green'/>
+                    
                     <Button
                         onPress={() => navigation.navigate("signUp")}
                         title="CRIAR CONTA" 
-                        type="SECONDARY" />
+                        bgColor="green" />
                 </Content>
             </Container>
         </ScrollView>
