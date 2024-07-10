@@ -2,7 +2,7 @@ import { Container, Subtitle, Title } from "./style"
 
 type Props = {
     title: string;
-    subtitle: string;
+    subtitle?: string;
     bgColor?:string
     align?:string
 }

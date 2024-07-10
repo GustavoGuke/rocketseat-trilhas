@@ -1,32 +1,49 @@
-import {  ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
-import { Container, Content, ImageContainer, TitleHeading } from "./style";
+import { ImageContainer, Text, Title, Xstack, Ystack } from "./style";
 
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
 
 import { AuthNavigationRoutesProps } from "@routes/auth.routes";
+import { useTheme } from 'styled-components/native';
+import { ScreenDefault } from '@components/ScreenDefault';
+import { ContenteDefault } from '@components/ContenteDefault';
+import { TextLinearGradient } from '@components/TextLinearGradient';
+import HighLight from '@components/Higthlight';
+
 
 export function Signin() {
+    const { COLORS } = useTheme()
     const navigation = useNavigation<AuthNavigationRoutesProps>()
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
-            <Container>
-                <Content>
-                    <ImageContainer resizeMode="contain" source={require('../../assets/img/logo-teste.png')} />
-                </Content>
-                <Content>
+            <ScreenDefault>
+                <Ystack>
+                    <Title>Realce</Title>
+                    <Title>Nutri</Title>
+                </Ystack>
+                <ContenteDefault bgColor={COLORS.GREEN_100}>
+                    <Input
+                        placeholder='Email'
+                        border={1}
+                        bgColor={COLORS.GREEN_100}
+                        borderColor={COLORS.GREEN_700} />
 
-                    <TitleHeading>acessar conta</TitleHeading>
-                    <Input placeholder="E-mail" keyboardType="email-address" />
-                    <Input placeholder="Senha" secureTextEntry />
-                    <Button title="ACESSAR" />
-                    <Button
-                        onPress={() => navigation.navigate("signUp")}
-                        title="CRIAR CONTA" 
-                        type="SECONDARY" />
-                </Content>
-            </Container>
+                    <Input
+                        placeholder='Senha'
+                        border={1}
+                        bgColor={COLORS.GREEN_100}
+                        borderColor={COLORS.GREEN_700} />
+
+                    <Button title='Acessar' bgColor={COLORS.GREEN_700}/>
+
+                    <Xstack>
+                        <Text></Text>
+                    </Xstack>
+
+                </ContenteDefault>
+            </ScreenDefault>
         </ScrollView>
     )
 }

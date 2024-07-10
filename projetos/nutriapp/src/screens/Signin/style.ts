@@ -1,17 +1,5 @@
 import styled from "styled-components/native";
 
-export const Container = styled.View`
-    flex: 1;
-    background-color: ${({ theme }) => theme.COLORS.GRAY_700};
-    padding:20px;
-`
-
-export const Content = styled.View`
-    flex:1;
-    justify-content:center;
-    padding:10px;
-   
-`
 
 export const ImageContainer = styled.ImageBackground`
     flex:1;
@@ -19,19 +7,26 @@ export const ImageContainer = styled.ImageBackground`
     margin-bottom:-90px;
 `
 
-export const Title = styled.Text`
-    color: ${({ theme }) => theme.COLORS.GRAY_100};
-    font-size: ${(props) => props.theme.FONT_SIZE.MD}px;
-    font-family:${(props) => props.theme.FONT_FAMILY.BOLD};
+export const Ystack = styled.View`
+    margin:20px 0px;
 `
 
+export const Xstack = styled.View`
+    flex-direction:row;
+`
 
-export const TitleHeading = styled.Text`
-    color: ${({ theme }) => theme.COLORS.GRAY_100};
+export const Title = styled.Text`
+    color: ${({ theme }) => theme.COLORS.ORANGE_500};
+    font-size: ${(props) => props.theme.FONT_SIZE.XX}px;
+    font-family:${(props) => props.theme.FONT_FAMILY.BOLD};
+    text-align:center;
+
+`
+
+export const Text = styled.Text`
+    color: ${({ theme }) => theme.COLORS.GRAY_700};
     font-size: ${(props) => props.theme.FONT_SIZE.LG}px;
     font-family:${(props) => props.theme.FONT_FAMILY.BOLD};
-    align-self: center;
-  
-    margin-bottom:-20px;
+    text-align:center;
 
 `
