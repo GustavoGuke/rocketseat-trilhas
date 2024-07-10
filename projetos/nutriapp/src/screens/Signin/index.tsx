@@ -1,4 +1,4 @@
-import { ScrollView } from 'react-native'
+import { ScrollView, TouchableOpacity } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import { ImageContainer, Text, Title, Xstack, Ystack } from "./style";
 
@@ -20,7 +20,7 @@ export function Signin() {
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
             <ScreenDefault>
                 <Ystack>
-                    <Title>Realce</Title>
+                    <Title >Realce</Title>
                     <Title>Nutri</Title>
                 </Ystack>
                 <ContenteDefault bgColor={COLORS.GREEN_100}>
@@ -36,11 +36,15 @@ export function Signin() {
                         bgColor={COLORS.GREEN_100}
                         borderColor={COLORS.GREEN_700} />
 
-                    <Button title='Acessar' bgColor={COLORS.GREEN_700}/>
+
+
 
                     <Xstack>
-                        <Text></Text>
+                        <TouchableOpacity>
+                            <Text>Esqueci a senha</Text>
+                        </TouchableOpacity>
                     </Xstack>
+                    <Button title='Acessar' bgColor={COLORS.GREEN_700} />
 
                 </ContenteDefault>
             </ScreenDefault>

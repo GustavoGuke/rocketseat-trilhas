@@ -1,5 +1,10 @@
 import styled from "styled-components/native";
 
+type PropsText ={
+    alignin?:string
+    color?:string
+    size?:number
+}
 
 export const ImageContainer = styled.ImageBackground`
     flex:1;
@@ -12,6 +17,7 @@ export const Ystack = styled.View`
 `
 
 export const Xstack = styled.View`
+    margin-bottom:10px;
     flex-direction:row;
 `
 
@@ -22,11 +28,12 @@ export const Title = styled.Text`
     text-align:center;
 
 `
-
-export const Text = styled.Text`
-    color: ${({ theme }) => theme.COLORS.GRAY_700};
-    font-size: ${(props) => props.theme.FONT_SIZE.LG}px;
+export const TitleHeading = styled.Text<PropsText>`
+    color: ${({ theme, color }) =>color || theme.COLORS.GRAY_100};
+    font-size: ${( {theme, size}) =>  size || theme.FONT_SIZE.LG}px;
     font-family:${(props) => props.theme.FONT_FAMILY.BOLD};
-    text-align:center;
+    align-self: ${({alignin}) => alignin || "center"};
+  
+
 
 `
