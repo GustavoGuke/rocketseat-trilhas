@@ -12,3 +12,9 @@
 -keep class com.facebook.react.turbomodule.** { *; }
 
 # Add any project specific keep options here:
+# Protegendo o google-services.json
+-keep class com.google.firebase.** { *; }
+-keepattributes *Annotation*
+-keepclassmembers class * {
+    @com.google.firebase.** <fields>;
+}
