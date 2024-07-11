@@ -1,6 +1,6 @@
-import { ScrollView, TouchableOpacity } from 'react-native'
+import { ScrollView } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
-import { ButtonSignIn, ImageContainer, Text, Title, Xstack, Ystack } from "./style";
+import { ButtonSignIn, Text, Title, Xstack, Ystack } from "./style";
 
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
@@ -9,8 +9,6 @@ import { AuthNavigationRoutesProps } from "@routes/auth.routes";
 import { useTheme } from 'styled-components/native';
 import { ScreenDefault } from '@components/ScreenDefault';
 import { ContenteDefault } from '@components/ContenteDefault';
-import { TextLinearGradient } from '@components/TextLinearGradient';
-import HighLight from '@components/Higthlight';
 
 
 export function Signin() {
@@ -45,7 +43,7 @@ export function Signin() {
 
                     <Xstack >
                         <Text weigth='regular' color={COLORS.GRAY_700} >Não tem uma conta?</Text>
-                        <ButtonSignIn bgColor={COLORS.GREEN_100} >
+                        <ButtonSignIn bgColor={COLORS.GREEN_100} onPress={()=> navigation.navigate("signUp")}>
                             <Text color={COLORS.ORANGE_500} >Criar conta</Text>
                         </ButtonSignIn>
                     </Xstack>
