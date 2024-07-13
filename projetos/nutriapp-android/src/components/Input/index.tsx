@@ -8,6 +8,7 @@ type Props = TextInputProps & {
     bgColor?: string
     color?: string
     border?:number
+    borderColor?:string
     margin?:number
     
 }
@@ -18,12 +19,14 @@ export function Input({
     bgColor, 
     color,
     border,
+    borderColor,
     margin, ...rest }: Props) {
     const { COLORS } = useTheme()
     return (
         <Container
             margin={margin}
             border={border}
+            borderColor={borderColor}
             minHeight={minHeight}
             maxHeight={maxHeight}
             bgColor={bgColor}

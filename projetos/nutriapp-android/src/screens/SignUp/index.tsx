@@ -1,29 +1,32 @@
-import { ScrollView } from "react-native";
+import { useState } from "react";
+import { Alert, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Container, Content, TitleHeading } from "./style";
 
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
 import { TextLinearGradient } from "@components/TextLinearGradient";
 
-import { AuthNavigationRoutesProps } from "@routes/auth.routes";
-
-
 import auth from '@react-native-firebase/auth';
-import { useState } from "react";
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
-import { Home } from "@screens/Home";
+import { ScreenDefault } from "@components/ScreenDefault";
+import { ContenteDefault } from "@components/ContenteDefault";
+import { useTheme } from "styled-components";
+
+
 
 export function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { COLORS } = useTheme()
     const navigation = useNavigation<AppNavigatorRoutesProps>()
 
 
     function handleSignUp() {
+        if (email === '' || password === '') {
+            return Alert.alert('Erro', 'Email e senha devem ser informados');
+        }
         auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then(() => navigation.navigate('Home'))
+            .createUserWithEmailAndPassword(email.trim(), password.trim())
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
                     console.log('That email address is already in use!');
@@ -38,27 +41,43 @@ export function SignUp() {
     }
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
+          
+                <ScreenDefault>
+                    <ContenteDefault bgColor={COLORS.GREEN_100}>
+                        <Input
+                            placeholder='Nome'
+                            border={1}
+                            bgColor={COLORS.GREEN_100}
+                            borderColor={COLORS.GREEN_700} />
 
-            <Container>
-                <Content>
-                    <TextLinearGradient />
-                </Content>
-                <Content>
-                    <TitleHeading>Crie sua conta</TitleHeading>
-                    <Input placeholder="Nome" />
-                    <Input placeholder="E-mail" 
-                    value={email} onChangeText={setEmail} keyboardType="email-address" />
-                    <Input placeholder="Senha" 
-                    value={password} onChangeText={setPassword}
-                    secureTextEntry />
-                    <Input placeholder="Confirme a senha" secureTextEntry />
-                    <Button title="CRIAR E ACESSAR" bgColor="green" onPress={handleSignUp}/>
-                    <Button
-                        onPress={() => navigation.goBack()}
-                        title="VOLTAR PARA O LOGIN"
-                        bgColor="green" />
-                </Content>
-            </Container>
+                        <Input
+                            placeholder='Email'
+                            border={1}
+                            bgColor={COLORS.GREEN_100}
+                            borderColor={COLORS.GREEN_700} 
+                            onChangeText={setEmail}
+                            value={email}/>
+                        <Input
+                            placeholder='Senha'
+                            border={1}
+                            bgColor={COLORS.GREEN_100}
+                            borderColor={COLORS.GREEN_700} 
+                            onChangeText={setPassword}
+                            value={password}/>
+                        <Input
+                            placeholder='Confirme a Senha'
+                            border={1}
+                            bgColor={COLORS.GREEN_100}
+                            borderColor={COLORS.GREEN_700} />
+                        <Button title="Acessar" bgColor="green"
+                            onPress={handleSignUp} />
+                        <Button
+                            bgColor={COLORS.ORANGE_300}
+                            onPress={() => navigation.goBack()}
+                            title="Voltar para o login"
+                        />
+                    </ContenteDefault>
+                </ScreenDefault>
         </ScrollView>
     )
 }

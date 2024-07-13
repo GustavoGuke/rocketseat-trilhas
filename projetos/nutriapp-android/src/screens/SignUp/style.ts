@@ -1,5 +1,12 @@
 import styled from "styled-components/native";
 
+
+type PropsText = {
+    alignin?: string
+    color?: string
+    size?: number
+}
+
 export const Container = styled.View`
     flex: 1;
     background-color: ${({ theme }) => theme.COLORS.GRAY_700};
@@ -26,11 +33,11 @@ export const Title = styled.Text`
 `
 
 
-export const TitleHeading = styled.Text`
-    color: ${({ theme }) => theme.COLORS.GRAY_100};
-    font-size: ${(props) => props.theme.FONT_SIZE.LG}px;
+export const TitleHeading = styled.Text<PropsText>`
+    color: ${({ theme, color }) => color || theme.COLORS.GRAY_100};
+    font-size: ${({ theme, size }) => size || theme.FONT_SIZE.LG}px;
     font-family:${(props) => props.theme.FONT_FAMILY.BOLD};
-    align-self: center;
+    align-self: ${({ alignin }) => alignin || "center"};
   
     margin-bottom:-20px;
 

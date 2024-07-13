@@ -6,6 +6,7 @@ import theme from "@theme/index";
 type Props = {
     bgColor?: string
     margin?: number
+    borderRadius?: number
 }
 
 export const Container = styled(TouchableOpacity) <Props>`
@@ -14,7 +15,7 @@ export const Container = styled(TouchableOpacity) <Props>`
     max-height: 46px;
     padding: 8px;
     background-color: ${({ theme, bgColor }: any) => bgColor || "transparent"};
-    border-radius: 6px;
+    border-radius: ${({ borderRadius }) => borderRadius || 6}px;
     border-color:${theme.COLORS.GREEN_700};;
     margin-top:${({margin}) => (margin || 20)}px;
     justify-content: center;

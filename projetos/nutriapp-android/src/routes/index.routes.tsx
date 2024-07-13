@@ -7,7 +7,7 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useEffect, useState } from 'react';
 
 export function Routes(){
-    const [user, setUser] = useState<FirebaseAuthTypes.User | null>();
+    const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
 
     useEffect(() => {
         const subscriber = auth().onAuthStateChanged(response => {

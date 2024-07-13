@@ -6,12 +6,13 @@ type Props = TouchableOpacityProps & {
     title: string;
     bgColor?: string;
     isLoading?:boolean; 
-    margin?:number
+    margin?:number;
+    borderRadius?:number
 }
 
-export function Button({ title, bgColor, margin, isLoading = false, ...rest }: Props) {
+export function Button({ title, bgColor, margin, borderRadius, isLoading = false, ...rest }: Props) {
     return (
-        <Container bgColor={bgColor} margin={margin}  {...rest}>
+        <Container bgColor={bgColor} margin={margin} borderRadius={borderRadius}  {...rest}>
             {isLoading? <LoadIndicator /> : <Title>{title}</Title>}
         </Container>
     )

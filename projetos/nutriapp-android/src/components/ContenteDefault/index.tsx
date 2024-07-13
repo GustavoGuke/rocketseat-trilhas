@@ -3,10 +3,11 @@ import { Container } from "./styles";
 
 type Props = {
     children: ReactNode
+    bgColor?:string
 }
-export function ContenteDefault({ children }: Props) {
+export function ContenteDefault({bgColor, children }: Props) {
     return (
-        <Container>
+        <Container bgColor={bgColor}>
             {children}
         </Container>
     )

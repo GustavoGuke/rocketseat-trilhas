@@ -6,6 +6,7 @@ type PropsStyleInput = {
     bgColor?: string
     color?:string
     border?:number
+    borderColor?:string
     margin?:number
 }
 
@@ -17,10 +18,10 @@ export const Container = styled.TextInput<PropsStyleInput>`
     font-size: ${(props) => props.theme.FONT_SIZE.MD}px;
     font-family:${(props) => props.theme.FONT_FAMILY.REGULAR};
     background-color: ${({ theme, bgColor }) => bgColor || theme.COLORS.GRAY_400};
-    color: ${({ theme, color }) => color || theme.COLORS.WHITE};
+    color: ${({ theme, color }) => color || theme.COLORS.GRAY_400};
     margin-top:${({margin}) => margin || 20 }px;
     border:${({border}) => border || 0 }px;
-    border-color:${({border, theme}) => border ? theme.COLORS.GRAY_200: theme.COLORS.WHITE};
+    border-color:${({borderColor, theme}) => borderColor || theme.COLORS.WHITE};
     border-radius: 6px;
     padding: 8px;
 `
