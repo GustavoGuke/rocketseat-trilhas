@@ -4,28 +4,32 @@ import { useNavigation } from "@react-navigation/native";
 
 import { Input } from "@components/Input";
 import { Button } from "@components/Button";
-import { TextLinearGradient } from "@components/TextLinearGradient";
 
 import auth from '@react-native-firebase/auth';
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
 import { ScreenDefault } from "@components/ScreenDefault";
 import { ContenteDefault } from "@components/ContenteDefault";
 import { useTheme } from "styled-components";
+import { createUsers } from "@utils/firebase/firestore";
 
 
 
 export function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
     const { COLORS } = useTheme()
     const navigation = useNavigation<AppNavigatorRoutesProps>()
 
 
-    function handleSignUp() {
+    async function handleSignUp() {
+
         if (email === '' || password === '') {
             return Alert.alert('Erro', 'Email e senha devem ser informados');
         }
-        auth()
+        
+        
+        const useCredencial= await auth()
             .createUserWithEmailAndPassword(email.trim(), password.trim())
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -36,8 +40,11 @@ export function SignUp() {
                     console.log('That email address is invalid!');
                 }
 
-                console.error(error);
-            });
+                return Alert.alert('Erro - tirar msg qundo for subir o app', error.message);
+        });
+        const userDisplaName = auth().currentUser
+        if(userDisplaName){userDisplaName.updateProfile({displayName: name})}
+        createUsers(useCredencial?.user.uid, name, email, 'paciente')
     }
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
@@ -48,7 +55,10 @@ export function SignUp() {
                             placeholder='Nome'
                             border={1}
                             bgColor={COLORS.GREEN_100}
-                            borderColor={COLORS.GREEN_700} />
+                            borderColor={COLORS.GREEN_700} 
+                            onChangeText={setName}
+                            value={name}
+                            />
 
                         <Input
                             placeholder='Email'

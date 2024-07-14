@@ -6,7 +6,8 @@ import backgroundImage from '../../assets/img/prato-comidaIA.png';
 import { TouchableOpacity, Text } from "react-native";
 
 export function Header(){
-
+    const user = auth().currentUser;
+    console.log(user)
     function handleSignOut() {
         auth()
             .signOut()
@@ -15,10 +16,11 @@ export function Header(){
     return (
         <Container >
             <ContainerTitle>
-                <Title>Relace</Title>
-                <Title>Nutri</Title>
+                <Avatar size={30} imageUri={backgroundImage} />
+                <Text>{user?.displayName}</Text>
+                
             </ContainerTitle>
-            <Avatar size={30}  imageUri={backgroundImage}/>
+            
             <TouchableOpacity onPress={handleSignOut}>
                 <Text>Sair</Text>
             </TouchableOpacity>
