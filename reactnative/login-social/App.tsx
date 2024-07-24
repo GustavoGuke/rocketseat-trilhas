@@ -9,6 +9,7 @@ import { Loading } from './src/components/Loading';
 import { AppProvider, UserProvider } from '@realm/react';
 
 import { REALM_APP_ID } from '@env'
+import { Home } from './src/screens/Home';
 export default function App() {
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
@@ -26,7 +27,7 @@ export default function App() {
           backgroundColor="transparent"
           translucent />
         <UserProvider fallback={Signin}>
-          <Loading />
+          <Home />
         </UserProvider>
        
       </ThemeProvider>
