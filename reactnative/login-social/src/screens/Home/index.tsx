@@ -13,7 +13,7 @@ export function Home() {
         <Container>
             <HomeHeader />
             <Content>
-                <CarStatus licensePlate="ABC-1234" onPress={handleRegisterMoviment}/>
+                <CarStatus licensePlate="ABC-1234" onPress={handleRegisterMoviment} />
             </Content>
         </Container>
     );
