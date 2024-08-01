@@ -17,13 +17,13 @@ export class Historic extends Realm.Object<Historic> {
     updated_at!: string;
     static generate({ user_id, license_plate, description }: GenerateProps) {
         return {
-            _id: new Realm.BSON.UUID().toString(),
+            _id: new Realm.BSON.UUID(),
             user_id,
             license_plate,
             description,
             status: 'pendente',
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
+            created_at: new Date(),
+            updated_at: new Date(),
         }
 
     }

@@ -1,3 +1,4 @@
+import 'react-native-get-random-values'
 import { ThemeProvider } from 'styled-components/native'
 import { StatusBar } from 'react-native';
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto'

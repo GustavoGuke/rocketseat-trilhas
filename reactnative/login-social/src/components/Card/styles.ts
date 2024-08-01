@@ -26,10 +26,13 @@ export const Message = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
   flex: 1;
   text-align: justify;
+  line-height: 21px;
+  textAlignVertical: center;
 `;
 
 export const TextHighlight = styled.Text`
   color: ${({ theme }) => theme.COLORS.BRAND_LIGHT};
   font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
+  
 `;
