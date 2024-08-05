@@ -12,7 +12,7 @@ import { AppProvider, UserProvider } from '@realm/react';
 
 import { REALM_APP_ID } from '@env'
 import { Routes } from './src/routes/index.routes';
-import { RealmProvider } from './src/libs/realm';
+import { RealmProvider, syncConfig } from './src/libs/realm';
 export default function App() {
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
@@ -31,7 +31,7 @@ export default function App() {
             backgroundColor="transparent"
             translucent />
           <UserProvider fallback={Signin}>
-            <RealmProvider>
+            <RealmProvider sync={syncConfig} fallback={Loading}>
               <Routes />
             </RealmProvider>
           </UserProvider>

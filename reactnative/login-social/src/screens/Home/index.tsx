@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 
+import { useUser } from '@realm/react';
 import { useQuery, useRealm } from '../../libs/realm';
 import { Historic } from "../../libs/realm/schemas/historic";
 
@@ -17,6 +18,7 @@ export function Home() {
     const { navigate } = useNavigation();
     const historic = useQuery(Historic);
     const realm = useRealm();
+    const user = useUser();
 
     function handleRegisterMoviment() {
         if (!vehicleInUse?._id) {
@@ -74,6 +76,15 @@ export function Home() {
     useEffect(() => {
         fetchHistoric()
     }, [historic])
+
+    useEffect(() => {
+        realm.subscriptions.update((mutableSubs, realm) => {
+            const historicByUserQuery = realm.objects('Historic').filtered(`user_id = '${user!.id}'`);
+
+            mutableSubs.add(historicByUserQuery, { name: 'hostoric_by_user' });
+        })
+    }, [realm]);
+
     return (
         <Container>
             <HomeHeader />
