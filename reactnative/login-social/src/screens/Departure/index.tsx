@@ -1,17 +1,25 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { TextInput, ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { useUser } from '@realm/react';
+import { useNavigation } from '@react-navigation/native';
+import { LocationAccuracy, LocationSubscription, useForegroundPermissions, watchPositionAsync } from 'expo-location';
+
+
 import { useRealm } from '../../libs/realm';
 
-import { Container, Content } from './styles';
+import { Container, Content, Message } from './styles';
 
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { LicensePlateInput } from '../../components/LicensePlateInput';
 import { TextAreaInput } from '../../components/TextAreaInput';
+
+
 import { licensePlateValidate } from '../../utils/licencePlateValidate';
 import { Historic } from '../../libs/realm/schemas/historic';
-import { useNavigation } from '@react-navigation/native';
+import { getAddressLocation } from '../../utils/getAddessLocation';
+import { Loading } from '../../components/Loading';
+import { LocationInfo } from '../../components/LocationInfo';
 
 
 const keyboardAvoidingViewBehavior = Platform.OS === 'android' ? 'height' : 'position';
@@ -19,6 +27,10 @@ export function Departure() {
     const [description, setDescription] = useState('')
     const [licensePlate, setLicensePlate] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [isLoadingLocation, setIsLoadingLocation] = useState(true)
+    const [currentAddress, setCurrentAddress] = useState<string | null>(null)
+
+    const [locationForegroundPermission, requestLocationForegroundPermission] = useForegroundPermissions();
 
     const { goBack } = useNavigation()
     const realm = useRealm();
@@ -59,12 +71,77 @@ export function Departure() {
 
     }
 
+    useEffect(() => {
+        requestLocationForegroundPermission();
+    }, [])
+
+    useEffect(() => {
+        if (!locationForegroundPermission?.granted) {
+            return;
+        }
+
+        let subscription: LocationSubscription;
+        watchPositionAsync({
+            accuracy: LocationAccuracy.High,
+            timeInterval: 1000,
+        }, (location) => {
+            getAddressLocation(location.coords)
+                .then(address => {
+                    if (address) {
+                        setCurrentAddress(address)
+                    }
+                })
+                .finally(() => {
+                    setIsLoadingLocation(false)
+                })
+        })
+            .then((response) => subscription = response)
+
+        return () => {
+            if (subscription) {
+                subscription.remove()
+            }
+        };
+    }, [locationForegroundPermission])
+
+
+    if (!locationForegroundPermission?.granted) {
+        return (
+            <Container>
+                <Header title='Saída' />
+                <Message>
+                    Você precisa permitir que o aplicativo tenha acesso a
+                    localização para acessar essa funcionalidade. Por favor, acesse as
+                    configurações do seu dispositivo para conceder a permissão ao aplicativo.
+                </Message>
+            </Container>
+        )
+    }
+
+    if (isLoadingLocation) {
+        return (
+            <Container>
+                <Header title='Saída' />
+                <Message>
+                    Carregando...
+                </Message>
+                <Loading />
+            </Container>
+        )
+    }
     return (
         <Container>
             <Header title='Saída' />
             <KeyboardAvoidingView style={{ flex: 1 }} behavior={keyboardAvoidingViewBehavior}>
                 <ScrollView>
                     <Content>
+                        {
+                            currentAddress &&
+                            <LocationInfo
+                                label='Localização atual'
+                                description={currentAddress}
+                            />
+                        }
                         <LicensePlateInput
                             ref={licensePlateRef}
                             onSubmitEditing={() => descriptionRef.current?.focus()}
