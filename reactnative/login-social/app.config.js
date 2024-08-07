@@ -1,3 +1,8 @@
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
+module.exports =
 {
   "expo": {
     "name": "login-social",
@@ -16,12 +21,18 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.cursorocketseat.ignitefleet"
+      "bundleIdentifier": "com.cursorocketseat.ignitefleet",
+      "config":{
+        "googleMapsApiKey": process.env.GOOGLE_MAPS_API_KEY
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#202024"
+        "backgroundColor": "#202024",
+        "config":{
+          "googleMaps": {"apiKey": process.env.GOOGLE_MAPS_API_KEY}
+        }
       },
       "package": "com.cursorocketseat.ignitefleet"
     },

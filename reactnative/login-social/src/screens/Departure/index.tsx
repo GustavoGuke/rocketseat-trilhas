@@ -2,8 +2,10 @@ import { useRef, useState, useEffect } from 'react';
 import { TextInput, ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { useUser } from '@realm/react';
 import { useNavigation } from '@react-navigation/native';
-import { LocationAccuracy, LocationSubscription, useForegroundPermissions, watchPositionAsync } from 'expo-location';
-
+import {
+    LocationAccuracy, LocationSubscription, useForegroundPermissions, 
+    watchPositionAsync,LocationObjectCoords } from 'expo-location';
+import { CarSimple } from 'phosphor-react-native';
 
 import { useRealm } from '../../libs/realm';
 
@@ -13,6 +15,7 @@ import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
 import { LicensePlateInput } from '../../components/LicensePlateInput';
 import { TextAreaInput } from '../../components/TextAreaInput';
+import { Map } from '../../components/Map';
 
 
 import { licensePlateValidate } from '../../utils/licencePlateValidate';
@@ -29,9 +32,9 @@ export function Departure() {
     const [isLoading, setIsLoading] = useState(false)
     const [isLoadingLocation, setIsLoadingLocation] = useState(true)
     const [currentAddress, setCurrentAddress] = useState<string | null>(null)
+    const [currentCoords, setCurrentCoords] = useState<LocationObjectCoords | null>(null)
 
     const [locationForegroundPermission, requestLocationForegroundPermission] = useForegroundPermissions();
-
     const { goBack } = useNavigation()
     const realm = useRealm();
     const user = useUser();
@@ -77,6 +80,7 @@ export function Departure() {
 
     useEffect(() => {
         if (!locationForegroundPermission?.granted) {
+            console.log('Permission to access location was denied');
             return;
         }
 
@@ -85,10 +89,12 @@ export function Departure() {
             accuracy: LocationAccuracy.High,
             timeInterval: 1000,
         }, (location) => {
+            setCurrentCoords(location.coords)
             getAddressLocation(location.coords)
                 .then(address => {
                     if (address) {
                         setCurrentAddress(address)
+                        console.log(address)
                     }
                 })
                 .finally(() => {
@@ -129,15 +135,18 @@ export function Departure() {
             </Container>
         )
     }
+    console.log(locationForegroundPermission)
     return (
         <Container>
             <Header title='Saída' />
             <KeyboardAvoidingView style={{ flex: 1 }} behavior={keyboardAvoidingViewBehavior}>
                 <ScrollView>
+                    {currentCoords && <Map coordinates={[currentCoords]} />}
                     <Content>
                         {
                             currentAddress &&
                             <LocationInfo
+                                icon={CarSimple}
                                 label='Localização atual'
                                 description={currentAddress}
                             />
