@@ -30,11 +30,11 @@ module.exports =
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#202024",
-        "config":{
-          "googleMaps": {"apiKey": process.env.GOOGLE_MAPS_API_KEY}
-        }
       },
-      "package": "com.cursorocketseat.ignitefleet"
+      "package": "com.cursorocketseat.ignitefleet",
+      "config": {
+        "googleMaps": { "apiKey": process.env.GOOGLE_MAPS_API_KEY }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
