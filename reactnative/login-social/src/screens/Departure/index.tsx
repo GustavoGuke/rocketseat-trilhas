@@ -3,13 +3,17 @@ import { TextInput, ScrollView, KeyboardAvoidingView, Platform, Alert } from 're
 import { useUser } from '@realm/react';
 import { useNavigation } from '@react-navigation/native';
 import {
-    LocationAccuracy, LocationSubscription, useForegroundPermissions, 
-    watchPositionAsync,LocationObjectCoords } from 'expo-location';
+    LocationAccuracy, 
+    requestBackgroundPermissionsAsync,
+    LocationSubscription, 
+    useForegroundPermissions, 
+    watchPositionAsync,
+    LocationObjectCoords } from 'expo-location';
 import { CarSimple } from 'phosphor-react-native';
 
 import { useRealm } from '../../libs/realm';
 
-import { Container, Content, Message } from './styles';
+import { Container, Content, Message, MessageContent } from './styles';
 
 import { Button } from '../../components/Button';
 import { Header } from '../../components/Header';
@@ -23,6 +27,8 @@ import { Historic } from '../../libs/realm/schemas/historic';
 import { getAddressLocation } from '../../utils/getAddessLocation';
 import { Loading } from '../../components/Loading';
 import { LocationInfo } from '../../components/LocationInfo';
+import { startLocationTask } from '../../tasks/backgroundLocation';
+import { openSettings } from '../../utils/openSettings';
 
 
 const keyboardAvoidingViewBehavior = Platform.OS === 'android' ? 'height' : 'position';
@@ -42,7 +48,7 @@ export function Departure() {
     const licensePlateRef = useRef<TextInput>(null);
 
 
-    function handleDepartureRegister() {
+    async function handleDepartureRegister() {
 
         try {
             if (!licensePlateValidate(licensePlate)) {
@@ -55,12 +61,33 @@ export function Departure() {
                 return Alert.alert('Finalidade inválida', 'Por favor, informe a finalidade da saída.')
             }
 
+            if (!currentCoords?.latitude && !currentCoords?.longitude) {
+                return Alert.alert('Localização', 'Não foi possível obter a localização atual. Tente novamente.')
+            }
+
             setIsLoading(true);
+            
+
+            const backgroundPermissions = await requestBackgroundPermissionsAsync()
+
+            if (!backgroundPermissions.granted) {
+                setIsLoading(false)
+                return Alert.alert('Localização', 'É necessário permitir que o App tenha acesso localização em segundo plano. Acesse as configurações do dispositivo e habilite "Permitir o tempo todo."', [
+                    { text: 'Abrir configurações', onPress: () => openSettings() }
+                ])
+            }
+
+            await startLocationTask();
             realm.write(() => {
                 realm.create('Historic', Historic.generate({
                     user_id: user!.id,
                     license_plate: licensePlate.toUpperCase(),
-                    description
+                    description,
+                    coords: [{
+                        latitude: currentCoords?.latitude,
+                        longitude: currentCoords?.longitude,
+                        timestamp: new Date().getTime(),
+                    }]
                 }))
             })
 
@@ -128,6 +155,15 @@ export function Departure() {
         return (
             <Container>
                 <Header title='Saída' />
+                <MessageContent>
+                    <Message>
+                        Você precisa permitir que o aplicativo tenha acesso a
+                        localização para acessar essa funcionalidade. Por favor, acesse as
+                        configurações do seu dispositivo para conceder a permissão ao aplicativo.
+                    </Message>
+
+                    <Button title='Abrir configurações' onPress={openSettings} />
+                </MessageContent>
                 <Message>
                     Carregando...
                 </Message>

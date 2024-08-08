@@ -24,6 +24,9 @@ module.exports =
       "bundleIdentifier": "com.cursorocketseat.ignitefleet",
       "config":{
         "googleMapsApiKey": process.env.GOOGLE_MAPS_API_KEY
+      },
+      "infoPlist": {
+        "UIBackgroundModes": ["location"],
       }
     },
     "android": {
@@ -34,7 +37,8 @@ module.exports =
       "package": "com.cursorocketseat.ignitefleet",
       "config": {
         "googleMaps": { "apiKey": process.env.GOOGLE_MAPS_API_KEY }
-      }
+      },
+      "Permissions": ["ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION", "ACCESS_BACKGROUND_LOCATION"]
     },
     "web": {
       "favicon": "./assets/favicon.png"

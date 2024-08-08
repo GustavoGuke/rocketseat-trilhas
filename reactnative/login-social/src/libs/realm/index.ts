@@ -1,6 +1,7 @@
 import { createRealmContext } from "@realm/react";
 
 import { Historic } from "./schemas/historic";
+import { Coords } from './schemas/coords';
 
 const realmAccessBehavior: Realm.OpenRealmBehaviorConfiguration = {
     type: Realm.OpenRealmBehaviorType.OpenImmediately
@@ -18,5 +19,6 @@ export const {
     useQuery,
     useObject
 } = createRealmContext({
-    schema: [Historic]
+    schema: [Historic, Coords],
+    schemaVersion:1
 });
