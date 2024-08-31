@@ -15,5 +15,11 @@ export const styles = StyleSheet.create({
     subtitle: {
         fontFamily: theme.fonts.family.regular,
         color: theme.colors.gray_300,
-    }
+    },
+    ingredientsContent: {
+        flexWrap: "wrap",
+        flexDirection: "row",
+        gap: 12,
+        paddingBottom: 200,
+    },
 });

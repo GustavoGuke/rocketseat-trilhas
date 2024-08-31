@@ -13,8 +13,8 @@ export const styles = StyleSheet.create({
     gap: 6,
   },
   image: {
-    width: 16,
-    height: 16,
+    width: 34,
+    height: 34,
   },
   selected: {
     borderWidth: 2,
@@ -25,4 +25,5 @@ export const styles = StyleSheet.create({
     fontSize: theme.fonts.size.body.sm,
     fontFamily: theme.fonts.family.medium,
   },
+ 
 })

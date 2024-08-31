@@ -7,13 +7,14 @@ export type IngredientsProps = {
   image: string
   selected?: boolean
 }
-
+const img = "@/images/apple.png"
 export function Ingredient({
   name,
   image,
   selected = false,
   ...rest
 }: IngredientsProps & PressableProps) {
+  
   return (
     <Pressable
       style={[styles.container, selected && styles.selected]}

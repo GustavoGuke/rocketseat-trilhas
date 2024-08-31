@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   ingredientsContent: {
     flexWrap: "wrap",
     flexDirection: "row",
-    gap: 10,
-    paddingHorizontal: 32,
+    gap: 12,
+    paddingBottom: 20,
   },
 })
