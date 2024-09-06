@@ -1,22 +1,36 @@
-import { Image, Text, View } from "react-native";
-import { useLocalSearchParams } from "expo-router";
-import { PRODUCTS } from "@/utils/data/products";
+import { Alert, Image, Text, View } from "react-native";
+import { useLocalSearchParams, useNavigation } from "expo-router";
+import {  PRODUCTS } from "@/utils/data/products";
 import { formatCurrency } from "@/utils/functions/formatCurrency";
 import Button from "@/components/Button";
 import { Feather } from "@expo/vector-icons";
 import { LinkButton } from "@/components/Link-Button";
+import { ProductCartProps, useCartStore } from "@/stores/cart-store";
 
 
 export default function Product() {
+    const cartStore = useCartStore()
+    const navigation = useNavigation()
     const { id } = useLocalSearchParams();
 
-    const product = PRODUCTS.find(item => item.id === id)
-    console.log(product)
+    const product = PRODUCTS.find((item) => item.id === id)
+    
+
+    function handleAddToCart() {
+        cartStore.addProduct(product)
+        Alert.alert("Pronto!", "Seu item foi adicionado ao carrinho", [
+            { text: "Ok", onPress: () => navigation.goBack()},
+        ])
+    }
     return (
         <View className="flex-1 bg-slate-900">
             <Image source={product?.cover} className="w-full h-52" resizeMode="cover" />
 
             <View className="p-5 mt-8 flex-1">
+                <Text className="text-white font-heading text-2xl mb-2">
+                    {product?.title}
+                </Text>
+
                 <Text className="text-lime-400 font-heading text-2xl mb-2">
                     {formatCurrency(product.price)}
                 </Text>
@@ -36,7 +50,7 @@ export default function Product() {
                 }
             </View>
             <View className="p-5 pb-8 gap-5">
-                <Button>
+                <Button onPress={handleAddToCart}>
                     <Button.Icon>
                         <Feather name="plus-circle" size={20} />
                     </Button.Icon>

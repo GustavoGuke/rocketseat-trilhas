@@ -5,13 +5,17 @@ import { Header } from "@/components/Header";
 import { Product } from "@/components/Product";
 import { ButtonCategory } from "@/components/ButtonCategory";
 
-import { CATEGORIES, MENU } from "@/utils/data/products";
+import { CATEGORIES, MENU, ProductProps } from "@/utils/data/products";
 import { Link } from "expo-router";
+import { useCartStore } from "@/stores/cart-store";
 
 
 export default function Home() {
+    const cartStore = useCartStore()
+    const cartQuanityItems = cartStore.products.reduce((total, product) => total + product.quantity, 0)
+
     const [categorySelected, setCategorySelected] = useState('')
-    const sectionListRef = useRef<SectionList>(null)
+    const sectionListRef = useRef<SectionList<ProductProps>>(null)
 
     function handleCategorySelect(category: string) {
         setCategorySelected(category)
@@ -28,7 +32,7 @@ export default function Home() {
     }
     return (
         <View className="flex-1 pt-10">
-            <Header title="Video para em 42 minitos e 39 segundos" cardQuantity={1} />
+            <Header title="Video para em 42 minitos e 39 segundos" cardQuantity={cartQuanityItems} />
 
             <FlatList
                 data={CATEGORIES}

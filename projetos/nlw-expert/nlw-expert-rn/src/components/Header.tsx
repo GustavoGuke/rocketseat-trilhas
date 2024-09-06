@@ -1,5 +1,6 @@
 // create um componente Header
 import { Feather } from "@expo/vector-icons";
+import { Link } from "expo-router";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import colors from "tailwindcss/colors";
 
@@ -17,13 +18,15 @@ export function Header({ title, cardQuantity = 0 }: HeaderProps) {
 
             {
                 cardQuantity > 0 &&
-                <TouchableOpacity className="relative" activeOpacity={0.7}>
-                    <View className="bg-lime-300 h-5 w-5 rounded-full items-center justify-center top-2 z-10 -right-3.5">
-                        <Text className="text-slate-900 font-bold text-xs">{cardQuantity}</Text>
-                    </View>
+                <Link href="/cart" asChild>
+                    <TouchableOpacity className="relative" activeOpacity={0.7}>
+                        <View className="bg-lime-300 h-5 w-5 rounded-full items-center justify-center top-2 z-10 -right-3.5">
+                            <Text className="text-slate-900 font-bold text-xs">{cardQuantity}</Text>
+                        </View>
 
-                    <Feather name="shopping-bag" size={24} color={colors.white} />
-                </TouchableOpacity>
+                        <Feather name="shopping-bag" size={24} color={colors.white} />
+                    </TouchableOpacity>
+                </Link>
             }
 
         </View>

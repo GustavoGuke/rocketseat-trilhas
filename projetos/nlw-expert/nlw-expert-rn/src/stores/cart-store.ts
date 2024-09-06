@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { ProductProps } from "@/utils/data/products";
-
+import * as cartInMemmory from "../stores/helpers/cart-in-memory";
 export type ProductCartProps = ProductProps & {
     quantity: number
 }
@@ -14,7 +14,8 @@ type CartStoreProps = {
 
 export const useCartStore = create<CartStoreProps>((set) => ({
     products: [],
-    addProduct: () => {},
+    addProduct: (product: ProductProps) => 
+        set((state) => ({ products: cartInMemmory.add(state.products, product) })),
     // removeProduct: (product) => set((state) => ({ products: state.products.filter((p) => p.id !== product.id) })),
     // clearCart: () => set({ products: [] }),
 }))
