@@ -39,14 +39,10 @@ export default function Cart() {
             `\n ${product.quantity} - ${product.title}`
         ).join("")
         const tel = ""
-        const msg = `
-         NOVO PEDIDO
+        const msg = `NOVO PEDIDO
          \n Entregar em: ${address}
-
-         \n ${product}
-        
+         ${product}
          \n Valor total: ${total}
-
         `
         Linking.openURL(`http://api.whatsapp.com/send?phone=${tel}&text=${msg}`)
         cartStore.clearCart()

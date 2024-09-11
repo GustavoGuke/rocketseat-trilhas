@@ -18,12 +18,7 @@ import { Alert } from 'react-native'
 import { AppError } from '@utils/AppError'
 import { useAuth } from '@hooks/useAuth'
 
-type FormDataTypeProps = {
-    name: string
-    email: string
-    password: string
-    password_confirm: string
-}
+
 
 const schema = yup
     .object({

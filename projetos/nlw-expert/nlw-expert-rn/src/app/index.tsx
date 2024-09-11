@@ -32,7 +32,7 @@ export default function Home() {
     }
     return (
         <View className="flex-1 pt-10">
-            <Header title="Video para em 42 minitos e 39 segundos" cardQuantity={cartQuanityItems} />
+            <Header title="Cardápio" cardQuantity={cartQuanityItems} />
 
             <FlatList
                 data={CATEGORIES}
