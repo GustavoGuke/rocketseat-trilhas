@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <title>Document</title>
 </head>
+
 <body class="bg-slate-900 text-gray-200 max-w-7xl mx-auto">
     <!-- cabeçalho -->
 
-    
-    <?php include('header.php') ?>
+
+    <?php include_once('./components/Header.php') ?>
 
     <main class="px-4 py-6">
         <!-- hero -->
@@ -30,8 +32,8 @@
                 <img src="https://github.com/GustavoGuke.png" alt="" class="w-32 h-32 rounded-full">
             </div>
         </section>
-        
-        
+
+
         <!-- projetos -->
         <section>
             <div></div>
@@ -40,8 +42,9 @@
 
 
     <!-- rodape -->
-     <footer>
-         <div></div>
-     </footer>
+    <footer>
+        <div></div>
+    </footer>
 </body>
+
 </html>
