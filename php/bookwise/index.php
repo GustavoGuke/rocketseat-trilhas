@@ -25,11 +25,64 @@
         </nav>
     </header>
 
-    <main class="px-8 py-4 mx-auto max-w-screen-lg bg-red-500">
+    <main class="px-8 py-4 mx-auto max-w-screen-lg space-y-6">
 
-        <div>Pesquisar</div>
+        <form action="" class="w-full flex space-x-2 mt-6">
+            
+            <input 
+                type="text" 
+                class="border-stone-700 border-2 rounded-md bg-stone-900 text-sm focus:outline-none px-2 py-1"
+                placeholder="livro">
+            <button type="submit" class="">Pesquisar</button>
+        </form>
 
-        <div>lista Final</div>
+        <section class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-4">
+
+            <div class="p-2 border-stone-700 border-2 rounded-md bg-stone-800">
+
+                <div class="flex">  
+
+                    <div class="w-1/3">
+                        <img src="https://picsum.photos/300/200" alt="">
+                    </div>
+
+                    <section class="">
+                        <a href="./livro.php" class="font-semibold hover:underline">Titulo do livro</a>
+                        <h3 class="text-xs italic">autor</h3>
+                        <p  class="text-xs italic">*****avaliação</p>
+                    </section>
+                </div>
+
+                <div>
+                    <p>descrição</p>
+                </div>
+            </div>
+
+            <div class="p-2 border-stone-700 border-2 rounded-md bg-stone-800">
+
+
+
+                <div class="flex">  
+
+                    <div class="w-1/3">
+                        <img src="https://picsum.photos/300/200" alt="">
+                    </div>
+
+                    <section class="">
+                        <h2 class="font-semibold">Titulo do livro</h2>
+                        <h3 class="text-xs italic">autor</h3>
+                        <p  class="text-xs italic">*****avaliação</p>
+                    </section>
+                </div>
+
+                <div>
+                    <p>descrição</p>
+                </div>
+            </div>
+
+
+
+        </section>
 
     </main>
 </body>
