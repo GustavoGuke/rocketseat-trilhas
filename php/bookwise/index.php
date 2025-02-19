@@ -1,3 +1,7 @@
+<?php 
+    require './dados.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +11,8 @@
     <title>Book Wise</title>
 </head>
 <body class="bg-stone-900 text-white">
+
+    
 
     <header class=" bg-stone-800 border-b border-stone-700 ">
         <nav class="flex justify-between items-center  py-4 mx-auto max-w-screen-lg">
@@ -38,27 +44,30 @@
 
         <section class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid gap-4">
 
-            <div class="p-2 border-stone-700 border-2 rounded-md bg-stone-800">
+            <!-- card -->
+             <?php foreach($livros as $livro): ?>
+                <div class="p-2 border-stone-700 border-2 rounded-md bg-stone-800">
 
                 <div class="flex">  
 
                     <div class="w-1/3">
-                        <img src="https://picsum.photos/300/200" alt="">
+                        <img src=<?=$livro['img']?> alt="capa do livro">
                     </div>
 
-                    <section class="">
-                        <a href="./livro.php" class="font-semibold hover:underline">Titulo do livro</a>
-                        <h3 class="text-xs italic">autor</h3>
-                        <p  class="text-xs italic">*****avaliação</p>
+                    <section class="space-y-1 pl-2">
+                        <a href="./livro.php?id=<?=$livro['id']?>" id=<?=$livro['id']?> class="font-semibold hover:underline"><?=$livro['titulo']?></a>
+                        <h3 class="text-xs italic"><?=$livro['autor']?></h3>
+                        <p  class="text-lg italic text-yellow-400"><?=$livro['avaliacao']?></p>
                     </section>
                 </div>
 
                 <div>
-                    <p>descrição</p>
+                    <p><?=$livro['descricao']?></p>
                 </div>
             </div>
+             <?php endforeach; ?>
 
-            <div class="p-2 border-stone-700 border-2 rounded-md bg-stone-800">
+            <!-- <div class="p-2 border-stone-700 border-2 rounded-md bg-stone-800">
 
 
 
@@ -78,9 +87,7 @@
                 <div>
                     <p>descrição</p>
                 </div>
-            </div>
-
-
+            </div> -->
 
         </section>
 
