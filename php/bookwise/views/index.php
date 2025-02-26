@@ -8,7 +8,7 @@
             </div>
 
             <section class="space-y-1 pl-2">
-                <a href="./livro.php?id=<?= $livro['id'] ?>" id=<?= $livro['id'] ?> class="font-semibold hover:underline"><?= $livro['titulo'] ?></a>
+                <a href="/livro?id=<?= $livro['id'] ?>" id=<?= $livro['id'] ?> class="font-semibold hover:underline"><?= $livro['titulo'] ?></a>
                 <h3 class="text-xs italic"><?= $livro['autor'] ?></h3>
                 <p class="text-lg italic text-yellow-400"><?= $livro['avaliacao'] ?></p>
             </section>
