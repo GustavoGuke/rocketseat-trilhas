@@ -19,3 +19,10 @@ contado = 0
 while contado < 5:
     print(contado)
     contado += 1
+
+
+# fnçoes
+def soma(n1, n2):
+    return n1 + n2
+
+print(soma(10, 20))
