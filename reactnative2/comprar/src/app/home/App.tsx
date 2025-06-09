@@ -3,6 +3,8 @@ import { Image, Text, View } from 'react-native';
 import { styles } from './style';
 import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
+import { Filter } from "@/components/Filter"
+import { FilterStatus } from "@/types/FilterStatus"
 
 export default function App() {
   return (
@@ -14,7 +16,11 @@ export default function App() {
         <Button title='Adicionar' />
       </View>
 
-      <View style={styles.content}></View>
+      <View style={styles.content}>
+
+      <Filter status={FilterStatus.DONE} isActive />
+      <Filter status={FilterStatus.PENDING} isActive={false} />
+      </View>
     </View>
   );
 }
