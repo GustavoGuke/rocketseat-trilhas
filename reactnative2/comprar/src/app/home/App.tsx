@@ -9,23 +9,34 @@ import { Item } from '@/components/Item';
 import { useState } from 'react';
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE]
-const ITEMS = [
-  { id: "1", status: FilterStatus.DONE, description: "Leite" },
-  { id: "2", status: FilterStatus.PENDING, description: "Pão" },
-  { id: "3", status: FilterStatus.PENDING, description: "Ovo" },
-]
-export default function App() {
-  const [filter, setFilter] = useState(FilterStatus.PENDING)
 
-  
+
+
+
+export default function App() {
+  const [ITEMS, setITEMS] = useState<any>([])
+  const [filter, setFilter] = useState(FilterStatus.PENDING)
+  const [description, setDescription] = useState("")
+  let id = 1
+
+  function handleAdd(){
+
+    let newItem = {"id":Math.random().toString(36).substring(2), status: FilterStatus.PENDING, description }
+    setITEMS(prev => [...prev,newItem])
+    id =+1
+    console.log(ITEMS)
+  }
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Image style={styles.logo} source={require('@/assets/logo.png')} />
       <View style={styles.form}>
-        <Input placeholder='O que você precisa comprar' />
-        <Button title='Adicionar' />
+        <Input
+          placeholder='O que você precisa comprar'
+          onChangeText={setDescription}
+        />
+        <Button title='Adicionar' onPress={handleAdd}/>
       </View>
 
       <View style={styles.content}>
@@ -36,9 +47,9 @@ export default function App() {
               <Filter
                 key={status}
                 status={status}
-                isActive = {status === filter}
+                isActive={status === filter}
                 onPress={() => setFilter(status)}
-                />
+              />
             ))
           }
           <TouchableOpacity style={styles.clearButton}>
