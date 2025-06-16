@@ -1,11 +1,12 @@
 import { ButtonIcon } from "@/components/ButtonIcon";
 import { Header } from "@/components/Header";
 import { Title } from "@/components/Title";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { StackRoutesProps } from "@/routes/StackRoutes";
 
-export function Product() {
-    const navigation = useNavigation();
+export function Product({ navigation, route }: StackRoutesProps<'Product'>) {
+    //const navigation = useNavigation();
     return (
         <View style={{
             flex: 1,
@@ -16,6 +17,7 @@ export function Product() {
                 <ButtonIcon name="arrow-circle-left" onPress={() => navigation.goBack()}/>
                 <Title>Product</Title>
             </Header>
+            {/* <Text>Product {route.params?.id}</Text> */}
         </View>
     )
 }
