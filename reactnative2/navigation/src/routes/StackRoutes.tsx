@@ -1,9 +1,13 @@
-import { Home } from "@/app/Home";
-import { Product } from "@/app/Product";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const Stack = createNativeStackNavigator();
+import { Home } from "@/app/Home";
+import { Product } from "@/app/Product";
 
+export type RootStackParamList = {
+    Home: undefined;
+    Product: undefined;
+}
+const Stack = createNativeStackNavigator<RootStackParamList>();
 export function StackRoutes() {
     return (
         <Stack.Navigator
