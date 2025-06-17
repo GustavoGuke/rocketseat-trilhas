@@ -2,10 +2,11 @@ import { ButtonIcon } from "@/components/ButtonIcon";
 import { Header } from "@/components/Header";
 import { Title } from "@/components/Title";
 import { Text, View } from "react-native";
-import { useNavigation } from '@react-navigation/native';
-import { StackRoutesProps } from "@/routes/StackRoutes";
+//import { StackRoutesProps } from "@/routes/StackRoutes";
+import { BottomTabsRoutesProps } from "@/routes/BottomTabsRoutes";
 
-export function Product({ navigation, route }: StackRoutesProps<'Product'>) {
+//export function Product({ navigation, route }: StackRoutesProps<'Product'>) {
+export function Product({ navigation }: BottomTabsRoutesProps<'Product'>) {
     //const navigation = useNavigation();
     return (
         <View style={{
