@@ -3,27 +3,25 @@ import ProjectCard from "@/app/components/common/ProjectCard";
 import TotalVisits from "@/app/components/common/TotalVisit";
 import UserCard from "@/app/components/common/UserCard";
 import { auth } from "@/app/lib/auth";
-import { getProfileData } from "@/app/server/get-profile-data";
+import { getProfileData, getProfileProjects } from "@/app/server/get-profile-data";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import NewProject from "./new-project";
+import { getDownloadURLFrmPath } from "@/app/lib/firebase";
 
 export default async function ProfilePage({ params, }: { params: Promise<{ profileId: string }> }) {
     const { profileId } = await params;
 
-    // verifca se o link existe
-    // const isLinkTaken = await verifyLink(profileId)
-    // if (!isLinkTaken) {
-    //     redirect("/")
-    // }
     const profileData = await getProfileData(profileId)
-    // verifca se o link existe
     if (!profileData) return notFound()
+
+    const projects = await getProfileProjects(profileId)
 
     const session = await auth()
     const isOwner = profileData.userId === session?.user?.id
     
+
 
     return (
         <div className="relative h-screen flex p-20 overflow-hidden">
@@ -39,14 +37,15 @@ export default async function ProfilePage({ params, }: { params: Promise<{ profi
                 <UserCard />
             </div>
             <div className="w-full flex justify-center content-start gap-4 flex-wrap overflow-y-auto">
-                {
-                    isOwner && <NewProject profileId={profileId} />
-                    
-                }
+                {isOwner && <NewProject profileId={profileId} />}
                 
                 {
-                    Array.from({ length: 5 }).map((_, index) => (
-                        <ProjectCard key={index} />
+                    projects.map(async(project, index) => (
+                        <ProjectCard key={project.id}  
+                            project={project}
+                            isOwner={isOwner}
+                            imgUrl={await getDownloadURLFrmPath(project.imagePath) || ""}
+                            />
                     ))
                 }
             </div>
