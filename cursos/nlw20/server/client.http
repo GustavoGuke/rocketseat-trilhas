@@ -1,0 +1,10 @@
+# variables
+@baseUrl = http://localhost:8080
+
+# Health check
+GET {{baseUrl}}/health
+
+###
+
+# Get Rooms
+GET {{baseUrl}}/rooms
