@@ -8,6 +8,7 @@ import {
 
 import { fastifyCors } from "@fastify/cors"
 import { env } from "./env.ts"
+import { getRoomsRoute } from "./http/routes/get-rooms.ts"
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -23,6 +24,7 @@ app.get('/health', () => {
     return 'Hello word Fastify'
 })
 
+app.register(getRoomsRoute)
 
 app.listen({port: env.PORT}).then(() => {
     console.log("Rodando olha o env", env.PORT)
