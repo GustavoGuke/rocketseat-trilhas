@@ -8,15 +8,16 @@ const ptSansCaption = PT_Sans_Caption({
 
 export const SupportSection = () => {
     return (
-        <section className="pb-8 md:py-10 bg-gray-700">
-            <div className="container flex flex-col items-center gap-12">
+        <section className="relative pb-8 md:py-10 bg-gray-700">
+            <div className="absolute inset-0 hidden md:block bg-[url('/background-features.svg')] bg-cover bg-center bg-no-repeat opacity-90" />
+            <div className="container flex flex-col items-center gap-12 relative">
                 <h2
                     className={`${ptSansCaption.className} text-balance text-center text-heading-xl text-gray-100`}
                 >
                     Sua loja de afiliados, simples, do jeito que deveria ser
                 </h2>
 
-                <div className="grid gap-6 md:grid-cols-3">
+                <div className="grid gap-6 md:grid-cols-3 ">
                     {/* Primeiro Card */}
                     <div className="flex flex-col text-left gap-2 rounded-lg p-6 md:p-12 bg-blue-400">
                         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-300 mb-4">
