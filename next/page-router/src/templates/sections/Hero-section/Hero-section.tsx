@@ -1,7 +1,8 @@
+import { Button } from '@/components/ui/button';
 import { ArrowRight, Clock, Store } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '../ui/button';
+
 
 export const HeroSection = () => {
     return (

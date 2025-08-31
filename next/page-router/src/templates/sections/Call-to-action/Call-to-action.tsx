@@ -1,7 +1,8 @@
+import { Button } from '@/components/ui/button';
 import { ArrowRight, Store } from 'lucide-react';
 import { PT_Sans_Caption } from 'next/font/google';
 import Link from 'next/link';
-import { Button } from '../ui/button';
+
 
 const ptSansCaption = PT_Sans_Caption({
     subsets: ['latin'],
@@ -10,7 +11,7 @@ const ptSansCaption = PT_Sans_Caption({
 
 export const CallToAction = () => {
     return (
-        <section className="py-24 bg-gradient-to-b from-cyan-950/20 to-gray-700">
+        <section className=" py-24 bg-gradient-to-b from-cyan-950/20 to-gray-700">
             <div className="container">
                 <div className="flex flex-col items-center gap-6 text-center">
                     <div className="p-4 bg-cyan-300 w-fit rounded-full">
