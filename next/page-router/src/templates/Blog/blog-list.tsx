@@ -1,5 +1,9 @@
+import { PostCard } from "@/components/Post-Card";
+import { PostGridCard } from "@/components/Post-Grid-Card";
 import { Search } from "@/components/Search";
+import { allPosts } from "contentlayer/generated";
 
+const posts = allPosts;
 
 export function BlogList() {
     return (
@@ -26,6 +30,19 @@ export function BlogList() {
             
 
             {/* Listagem de posts */}
+           <PostGridCard>
+            {posts.map((post) => (
+                <PostCard
+                    key={post._id}
+                    title={post.title}
+                    description={post.description}
+                    slug={post.slug}
+                    image={post.image}
+                    date={new Date(post.date).toLocaleDateString("pt-BR")}
+                    author={{ avatar: post.author.avatar, name: post.author.name }}
+                />
+            ))}
+           </PostGridCard>
         </div>
     );
 }
