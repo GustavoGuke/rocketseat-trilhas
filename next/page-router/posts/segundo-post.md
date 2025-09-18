@@ -10,7 +10,7 @@ author:
 
 O Site.Set oferece tudo o que você precisa para criar uma loja online eficiente e personalizada. Desde a integração com sistemas de pagamento até a criação de páginas de vendas, veja por que milhares de empreendedores escolhem nossa plataforma. Criar uma loja virtual de sucesso nunca foi tão fácil. Com nossa plataforma intuitiva, você pode criar um site profissional para sua loja em minutos, sem precisar de conhecimentos técnicos.
 
-Veja o que nossa plataforma oferece:
+## Veja o que nossa plataforma oferece:
 
 **Loja responsiva**: Sua loja estará otimizada para todos os dispositivos, garantindo uma experiência de compra perfeita em qualquer tela.
 
