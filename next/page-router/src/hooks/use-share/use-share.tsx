@@ -32,6 +32,7 @@ export const useShare = ({
     async (provider: SocialProvider) => {
       try {
         if (provider === 'clipboard') {
+          console.log("passei aqui")
           return await handleCopy(url);
         }
 
@@ -76,3 +77,4 @@ export const useShare = ({
 
   return { shareButtons };
 };
+
